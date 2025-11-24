@@ -4,8 +4,8 @@ import { createSlice } from "@reduxjs/toolkit";
 const INITIAL_USER_INFO = {
   ID: null,
   USTA_PIN: null,
-  NAME: "Lavish",
-  USER_TYPE: "TCH",
+  NAME: "Guest",
+  USER_TYPE: "GUEST",
   IS_LOGGED_IN: null,
 };
 
