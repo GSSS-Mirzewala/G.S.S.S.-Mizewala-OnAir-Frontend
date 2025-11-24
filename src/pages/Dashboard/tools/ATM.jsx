@@ -1,5 +1,5 @@
 // Dependencies
-import { format, getDate, getYear } from "date-fns";
+import { format, getYear } from "date-fns";
 
 // React Hooks
 import { useEffect, useState } from "react";
@@ -42,36 +42,7 @@ function ATM() {
   const { isHoliday } = useHoliday();
 
   // States
-  const [STD_LIST, UPDATE_STD_LIST] = useState([
-    {
-      Avatar: Avatar,
-      ID: 1,
-      Name: "Tanveer Nahar",
-      Father: "Sukhwant Singh",
-      marked: false,
-    },
-    {
-      Avatar: Avatar,
-      ID: 2,
-      Name: "Sahil",
-      Father: "Santosh Kumar",
-      marked: false,
-    },
-    {
-      Avatar: Avatar,
-      ID: 3,
-      Name: "Mankirat Singh",
-      Father: "Jagsir Singh",
-      marked: false,
-    },
-    {
-      Avatar: Avatar,
-      ID: 4,
-      Name: "Janak Raj",
-      Father: "Hari Ram",
-      marked: false,
-    },
-  ]);
+  const [STD_LIST, UPDATE_STD_LIST] = useState([]);
 
   const [MESSAGE, SET_MESSAGE] = useState();
   const Messages = [
