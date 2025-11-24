@@ -1,0 +1,18 @@
+.Display {
+  border-radius: 4px;
+  overflow: hidden;
+  height: 80vh;
+}
+
+.Changers {
+  width: 1rem;
+  height: 1rem;
+  border-radius: 50%;
+  cursor: pointer;
+}
+
+@media (max-width: 648px) {
+  .Display {
+    height: 40vh;
+  }
+}
