@@ -5,6 +5,7 @@ import { Link } from "react-router-dom";
 import Home from "@icons/Home.svg";
 import Gallery from "@icons/Gallery.svg";
 import Dashboard from "@icons/Dashboard.svg";
+import About from "@icons/About.svg";
 import Notifications from "@icons/Notifications.svg";
 
 function Navigation() {
@@ -23,6 +24,11 @@ function Navigation() {
       <div>
         <Link to="/dashboard">
           <img src={Dashboard} alt="Dashboard" width={25} />
+        </Link>
+      </div>
+      <div>
+        <Link to="/about">
+          <img src={About} alt="About" width={25} />
         </Link>
       </div>
       <div>

@@ -2,11 +2,15 @@ import axios from "axios";
 import { useEffect, useState } from "react";
 
 function Quote() {
-  const [QUOTE, SET_QUOTE] = useState("");
+  const [QUOTE, SET_QUOTE] = useState();
 
   async function fetchQuote() {
-    const res = await axios.get("http://localhost:8000/api/public/quote");
-    SET_QUOTE(res.data.quote);
+    const res = await axios.get("api.gsssmirzewala.in/api/public/quote");
+    if (!res.data.quote) {
+      SET_QUOTE("Teachers plant seeds of knowledge that grow forever.");
+    } else {
+      SET_QUOTE(res.data.quote);
+    }
   }
 
   useEffect(() => {

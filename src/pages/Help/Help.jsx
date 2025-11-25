@@ -33,7 +33,7 @@ function Help() {
     try {
       SET_API_CALLED(true);
       const response = await axios.post(
-        "https://backend-9gh6.onrender.com/api/help/submit",
+        "api.gsssmirzewala.in/api/help/submit",
         Data
       );
       console.log(response.data);

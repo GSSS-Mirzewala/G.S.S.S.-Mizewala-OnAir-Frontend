@@ -52,7 +52,7 @@ function Login() {
     try {
       SET_API_CALLED(true);
       const response = await axios.post(
-        "https://backend-9gh6.onrender.com/api/auth/login",
+        "api.gsssmirzewala.in/api/auth/login",
         Credentials,
         { withCredentials: true }
       );
@@ -176,15 +176,13 @@ function Login() {
       </Form>
       <div className="w-full flex flex-row justify-between">
         <Link to="/help">
-          <button
-            className={`text-base font-semibold font-inter bg-black md:bg-transparent text-white md:text-black py-1 md:py-0 px-2 md:px-0 rounded-sm md:rounded-none cursor-pointer`}
-          >
+          <button className="text-base font-semibold font-inter cursor-pointer px-2">
             Need Help?
           </button>
         </Link>
         <Link to="/about">
           <button
-            className={`text-base font-semibold font-inter bg-black md:bg-transparent text-white md:text-black py-1 md:py-0 px-2 md:px-0 rounded-sm md:rounded-none cursor-pointer`}
+            className="hidden sm:block text-base font-semibold font-inter cursor-pointer px-2"
             onClick={handleSkip}
           >
             About
