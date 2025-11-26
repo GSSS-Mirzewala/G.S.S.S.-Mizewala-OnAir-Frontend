@@ -52,7 +52,7 @@ function Login() {
     try {
       SET_API_CALLED(true);
       const response = await axios.post(
-        "api.gsssmirzewala.in/api/auth/login",
+        "https://api.gsssmirzewala.in/api/auth/login",
         Credentials,
         { withCredentials: true }
       );
