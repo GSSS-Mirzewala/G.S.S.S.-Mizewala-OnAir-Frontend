@@ -61,8 +61,6 @@ export default Preview;
 export async function PreviewAction({ request }) {
   const store = useSelector((store) => store.ATM_SHEET);
 
-  console.log(store);
-
   // Sanitizing Data
   const USTA_PIN = useBSF(formData.get("USTA_PIN"));
   const Password = useBSF(formData.get("Password"));

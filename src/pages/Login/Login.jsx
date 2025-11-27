@@ -1,13 +1,15 @@
 // External Modules
-import axios from "axios";
 import { Form, Link } from "react-router-dom";
 
 // React Hooks
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 
-// Local Hooks
+// Local Modules
 import { useBSF } from "@hooks/SecurityHooks";
+import API from "@utils/API";
+import API_Loader from "@ui/API_Loader";
+import API_Status from "@ui/API_Status";
 
 // Icons
 import Open_Eye from "@icons/Open_Eye.svg";
@@ -23,7 +25,11 @@ function Login() {
   // States
   const [USTA_PIN, SET_USTA_PIN] = useState("");
   const [Password, SET_Password] = useState("");
+
   const [API_CALLED, SET_API_CALLED] = useState(false);
+  const [ERROR, SET_ERROR] = useState(null);
+  const [SUCCESS, SET_SUCCESS] = useState(null);
+
   const [Password_Visibility, SET_Password_Visibility] = useState("hidden");
   const [Eye_Icon_Visibility, SET_Eye_Icon_Visibility] = useState("hidden");
 
@@ -43,22 +49,17 @@ function Login() {
     const ustaPin = useBSF(USTA_PIN);
     const password = useBSF(Password);
 
-    // Creating Credentials Object
-    const Credentials = {
-      ustaPin,
-      password,
-    };
-
     try {
       SET_API_CALLED(true);
-      const response = await axios.post(
-        "https://api.gsssmirzewala.in/api/auth/login",
-        Credentials,
-        { withCredentials: true }
-      );
-      console.log(response.data);
+      const response = await API("POST", "auth/login", true, {
+        ustaPin,
+        password,
+      });
+      if (response) {
+        SET_SUCCESS("Successfully logged in. Redirecting...");
+      }
     } catch (error) {
-      throw Error(error);
+      SET_ERROR(error.message);
     } finally {
       SET_API_CALLED(false);
     }
@@ -162,16 +163,18 @@ function Login() {
             </div>
           </div>
         </div>
+        {ERROR !== null && <API_Status type="error" message={ERROR} />}
+        {SUCCESS !== null && <API_Status type="success" message={SUCCESS} />}
         <div className="flex flex-col gap-4 mt-4">
-          <button
-            type="submit"
-            className={
-              "bg-black text-white font-inter w-fit rounded-sm cursor-pointer font-semibold px-12 py-2"
-            }
-            disabled={API_CALLED}
-          >
-            {API_CALLED ? "Logging in..." : "Login"}
-          </button>
+          {API_CALLED && <API_Loader />}
+          {SUCCESS === null && (
+            <button
+              type="submit"
+              className={`bg-black text-white font-inter w-fit rounded-sm cursor-pointer font-semibold px-12 py-2`}
+            >
+              {ERROR !== null ? "Retry" : "Login"}
+            </button>
+          )}
         </div>
       </Form>
       <div className="w-full flex flex-row justify-between">

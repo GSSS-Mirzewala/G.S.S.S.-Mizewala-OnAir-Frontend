@@ -8,6 +8,7 @@ import { Link } from "react-router-dom";
 import Home from "@icons/Home.svg";
 import Gallery from "@icons/Gallery.svg";
 import Dashboard from "@icons/Dashboard.svg";
+import About from "@icons/About.svg";
 import Notifications from "@icons/Notifications.svg";
 
 // Assets
@@ -48,6 +49,11 @@ function Navbar() {
           </Link>
         </div>
         <div className="hidden md:block cursor-pointer">
+          <Link to="/about">
+            <img src={About} width={25} alt="About" />
+          </Link>
+        </div>
+        <div className="hidden md:block cursor-pointer">
           <Link to="/notifications">
             <img src={Notifications} width={25} alt="Notifications" />
           </Link>
@@ -65,7 +71,7 @@ function Navbar() {
               loading="lazy"
             />
             <span className="font-semibold text-md">
-              {USER.USER_TYPE === "GUEST" ? "Guest" : USER.NAME}
+              {USER.USER_TYPE === "GUEST" ? "Login" : USER.NAME}
             </span>
           </button>
         </Link>

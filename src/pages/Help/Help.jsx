@@ -1,10 +1,12 @@
 // External Modules
-import axios from "axios";
 import { Form, Link } from "react-router-dom";
 import { useState } from "react";
 
 // Local Modules
 import { useBRTSF } from "@hooks/SecurityHooks";
+import API from "@utils/API";
+import API_Loader from "@ui/API_Loader";
+import API_Status from "@ui/API_Status";
 
 // Styles
 import styles from "./Help.module.css";
@@ -16,29 +18,30 @@ import CardInfo from "@/data/HelpCards";
 
 function Help() {
   const [API_CALLED, SET_API_CALLED] = useState(false);
+  const [ERROR, SET_ERROR] = useState(null);
+  const [SUCCESS, SET_SUCCESS] = useState(null);
+
   const [Email, SET_Email] = useState("");
   const [Concern, SET_Concern] = useState("");
 
   async function handleOnSubmit(e) {
     e.preventDefault();
-    const EMAIL = useBRTSF(Email);
-    const CONCERN = useBRTSF(Concern);
-
-    // Creating Data Object
-    const Data = {
-      email: EMAIL,
-      concern: CONCERN,
-    };
+    const email = useBRTSF(Email);
+    const concern = useBRTSF(Concern);
 
     try {
       SET_API_CALLED(true);
-      const response = await axios.post(
-        "https://api.gsssmirzewala.in/api/help/submit",
-        Data
-      );
-      console.log(response.data);
+      const response = await API("POST", "help/submit", false, {
+        email,
+        concern,
+      });
+      if (response) {
+        SET_SUCCESS(
+          "Your help request has been submitted! We'll get back to you soon!"
+        );
+      }
     } catch (error) {
-      throw Error(`${error.response?.data || error}`);
+      SET_ERROR(error.message);
     } finally {
       SET_API_CALLED(false);
     }
@@ -89,15 +92,21 @@ function Help() {
               onChange={(e) => SET_Concern(e.target.value)}
             ></textarea>
           </div>
-          <button
-            type="submit"
-            className={
-              "bg-black text-white font-inter w-fit rounded-sm cursor-pointer font-semibold px-6 py-2"
-            }
-            disabled={API_CALLED}
-          >
-            {API_CALLED ? "Submitting..." : "Submit"}
-          </button>
+          {ERROR !== null && <API_Status type="error" message={ERROR} />}
+          {SUCCESS !== null && <API_Status type="success" message={SUCCESS} />}
+          {API_CALLED ? (
+            <API_Loader />
+          ) : (
+            <button
+              type="submit"
+              className={
+                "bg-black text-white font-inter w-fit rounded-sm cursor-pointer font-semibold px-6 py-2"
+              }
+              disabled={API_CALLED}
+            >
+              {ERROR !== null ? "Retry" : "Submit"}
+            </button>
+          )}
         </Form>
       </div>
       <div className="mt-10">
