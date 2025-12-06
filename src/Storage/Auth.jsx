@@ -1,4 +1,4 @@
-import API from "@utils/API.js";
+import api from "@utils/api.js";
 import { createContext, useEffect, useState } from "react";
 
 const AuthContext = createContext();
@@ -7,7 +7,7 @@ export default AuthContext;
 export const AuthProvider = ({ children }) => {
   const [User, SetUser] = useState();
   useEffect(() => {
-    API("GET", "auth/me", true).then(async (res) => {
+    api("GET", "auth/me", true).then(async (res) => {
       if (!res.ok) {
         SetUser(null);
         return;
