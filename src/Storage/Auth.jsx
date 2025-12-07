@@ -13,6 +13,7 @@ export const AuthProvider = ({ children }) => {
         return;
       } else {
         const UserData = await res.json();
+        console.log(UserData);
       }
     });
   }, []);

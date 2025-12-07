@@ -8,10 +8,11 @@ async function api(REQUEST_TYPE, END_POINT, CREDENTIALS, DATA) {
       withCredentials: CREDENTIALS ? true : false,
     });
   } else if (REQUEST_TYPE === "POST") {
-    return await axios.post(API_URI, {
-      data: DATA,
-      withCredentials: CREDENTIALS ? true : false,
-    });
+    return await axios.post(
+      API_URI,
+      { data: DATA },
+      { withCredentials: CREDENTIALS ? true : false }
+    );
   } else {
     return new Error("Error: Invalid Request Type");
   }

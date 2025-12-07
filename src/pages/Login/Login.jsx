@@ -183,14 +183,6 @@ function Login() {
             Need Help?
           </button>
         </Link>
-        <Link to="/about">
-          <button
-            className="hidden sm:block text-base font-semibold font-inter cursor-pointer px-2"
-            onClick={handleSkip}
-          >
-            About
-          </button>
-        </Link>
       </div>
     </div>
   );

@@ -65,7 +65,7 @@ function Marker() {
 
   useEffect(() => {
     const response = api("GET", `tch/students/class/${Class}`).then((data) => {
-      UPDATE_STD_LIST(Array(data.data));
+      UPDATE_STD_LIST(data.data.mongodata);
     });
     SET_MESSAGE(GetNotificationMessage());
   }, []);
