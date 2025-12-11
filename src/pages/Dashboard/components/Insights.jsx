@@ -1,4 +1,7 @@
-// Local Hooks
+// External Modules
+import { format, getYear } from "date-fns";
+
+// Local Modules
 import { usePreference } from "@hooks/ContextHooks";
 
 function Insights() {
@@ -24,7 +27,7 @@ function Insights() {
     <div className="w-full py-4 px-6 rounded-sm bg-white">
       <h2 className="text-xl text-[#c0c0c0] font-semibold">
         {LANGUAGE === "hi" ? "उपस्थिति विवरण " : "Yours Insights "}(
-        {format(new Date(), "MMMM")})
+        {format(new Date(), "MMM.") + " " + getYear(new Date())})
       </h2>
       <div className="w-full flex flex-wrap px-0 md:px-3 pt-3 md:pt-5 pb-8 gap-y-6 gap-x-10 overflow-y-auto">
         {DATES.map((DATE) => {
