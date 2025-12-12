@@ -1,0 +1,9 @@
+User-agent: *
+  Disallow: /login
+  Disallow: /logout
+  Disallow: /notifications
+  Disallow: /dashboard
+  
+  Allow: /
+  
+  Sitemap: https://www.gsssmirzewala.in/sitemap.xml

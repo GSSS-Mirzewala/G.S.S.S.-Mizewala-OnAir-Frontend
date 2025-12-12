@@ -2,7 +2,7 @@
 import { Form, Link } from "react-router-dom";
 
 // React Hooks
-import { useEffect, useRef, useState } from "react";
+import { use, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
@@ -60,14 +60,40 @@ function Login() {
       if (response.status === 200 && response.data.success) {
         sessionStorage.setItem("loggedIn", true);
         const { name, userType, gender, photoUrl } = response.data.mongodata;
-        dispatch(
-          User_Actions.SET_USER({
-            name,
-            userType,
-            gender,
-            photoUrl,
-          })
-        );
+        if (userType === "STD") {
+          const { studentRef } = response.data.mongodata;
+          dispatch(
+            User_Actions.SET_USER({
+              name,
+              userType,
+              gender,
+              studentRef,
+              photoUrl,
+            })
+          );
+        } else if (userType === "TCH") {
+          const { teacherRef } = response.data.mongodata;
+          dispatch(
+            User_Actions.SET_USER({
+              name,
+              userType,
+              gender,
+              teacherRef,
+              photoUrl,
+            })
+          );
+        } else {
+          const { adminRef } = response.data.mongodata;
+          dispatch(
+            User_Actions.SET_USER({
+              name,
+              userType,
+              gender,
+              adminRef,
+              photoUrl,
+            })
+          );
+        }
         navigate("/");
       } else {
         SET_ERROR(response.data.message);

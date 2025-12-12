@@ -1,7 +1,7 @@
-// React Hooks
+// External Modules
 import { useState } from "react";
 
-// Local Components
+// Local Modules
 import Notification from "./components/Notification";
 import NotificationModal from "./components/NotificationModal";
 import Tools from "./components/Tools";
