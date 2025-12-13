@@ -11,8 +11,12 @@ import Quote from "./components/Quote";
 import Question from "./components/Question";
 import NewUpdate from "./components/NewUpdate";
 import api from "@utils/api";
+import useHead from "@hooks/Head.jsx";
 
 function Home() {
+  useHead({
+    title: "Home | G.S.S.S. Mirzewala",
+  });
   // New Update Notification (Block)
   const [NOTIFY, SET_NOTIFY] = useState();
   const [NEW_UPDATE_DATA, SET_NEW_UPDATE_DATA] = useState(null);

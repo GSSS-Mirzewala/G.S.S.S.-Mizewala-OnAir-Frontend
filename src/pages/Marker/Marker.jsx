@@ -1,12 +1,7 @@
-// Dependencies
+// External Modules
 import { format, getYear } from "date-fns";
-
-// React Hooks
 import { useEffect, useState } from "react";
 import { useDispatch } from "react-redux";
-
-// Local Hooks
-import { useHoliday } from "@hooks/ContextHooks";
 
 // Assets
 import Avatar from "@/assets/public/Avatar.svg";
@@ -14,18 +9,21 @@ import Avatar from "@/assets/public/Avatar.svg";
 // Graphics
 import Holiday_Light from "@graphics/Holiday_Light.svg";
 
-// Local Components
-import MarkerStudentRow from "../components/MarkerStudentRow";
-import Preview from "../components/Preview";
+// Local Modules
+import { useHoliday } from "@hooks/ContextHooks";
+import MarkerStudentRow from "./components/MarkerStudentRow";
+import Preview from "../Dashboard/components/Preview";
 import Message from "@components/Message";
+import useHead from "@hooks/Head.jsx";
+import { MarkerActions } from "@/store/slices/MarkerSlice";
 
 // Utilities
 import api from "@utils/api";
 
-// Redux Slices
-import { MarkerActions } from "@/store/slices/MarkerSlice";
-
 function Marker() {
+  useHead({
+    title: "Marker | G.S.S.S. Mirzewala",
+  });
   const [PREVIEW_STATE, UPDATE_PREVIEW_STATE] = useState("hidden");
   const [Class, SetClass] = useState(9);
   const dispatch = useDispatch();

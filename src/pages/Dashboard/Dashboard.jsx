@@ -1,15 +1,17 @@
 // External Modules
 import { useSelector } from "react-redux";
-import { useEffect } from "react";
 
 // Local Modules
-import api from "@utils/api";
+import useHead from "@hooks/Head.jsx";
 
 // Dashboards
 import Teacher from "./Teacher";
 import Student from "./Student";
 
 function Dashboard() {
+  useHead({
+    title: "Dashboard | G.S.S.S. Mirzewala",
+  });
   const USER = useSelector((store) => store.USER);
   return (
     <>

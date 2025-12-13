@@ -1,13 +1,17 @@
-// React Hooks
+// External Modules
 import { useEffect, useState } from "react";
 
-// Local Components
+// Local Modules
 import Message from "@components/Message";
+import useHead from "@hooks/Head.jsx";
 
 // Graphics
 import Empty_Notification_Light from "@graphics/Empty_Notifications_Light.svg";
 
 function Notifications() {
+  useHead({
+    title: "Notifications | G.S.S.S. Mirzewala",
+  });
   const [MESSAGE, SET_MESSAGE] = useState();
   const Messages = [
     "No updates… maybe the teachers are on a coffee break ☕",

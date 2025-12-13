@@ -1,11 +1,15 @@
-// Local Modules
-import api from "@utils/api";
+// External Modules
+import { useEffect, useState } from "react";
 import { format } from "date-fns";
 
-// Local Hooks
-import { useEffect, useState } from "react";
+// Local Modules
+import api from "@utils/api";
+import useHead from "@hooks/Head.jsx";
 
 function ReleaseNotes() {
+  useHead({
+    title: "Release Notes | G.S.S.S. Mirzewala",
+  });
   const [RELEASE_NOTES, UPDATE_RELEASE_NOTES] = useState([]);
   async function getNotes() {
     const response = await api("GET", "public/updates", false);

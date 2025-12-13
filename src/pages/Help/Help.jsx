@@ -7,6 +7,7 @@ import { useBRTSF } from "@hooks/SecurityHooks";
 import api from "@utils/api";
 import API_Loader from "@components/API_Loader";
 import API_Status from "@components/API_Status";
+import useHead from "@hooks/Head.jsx";
 
 // Styles
 import styles from "./Help.module.css";
@@ -14,9 +15,10 @@ import styles from "./Help.module.css";
 // Data
 import CardInfo from "@/data/HelpCards";
 
-// UI/UX Components
-
 function Help() {
+  useHead({
+    title: "Help | G.S.S.S. Mirzewala",
+  });
   const [API_CALLED, SET_API_CALLED] = useState(false);
   const [ERROR, SET_ERROR] = useState(null);
   const [SUCCESS, SET_SUCCESS] = useState(null);

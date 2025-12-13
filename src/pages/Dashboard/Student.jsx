@@ -1,4 +1,4 @@
-// Local Components
+// Local Modules
 import Insights from "./components/Insights";
 
 function Student() {

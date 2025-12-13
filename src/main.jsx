@@ -2,7 +2,6 @@
 import "./i18n";
 import ReactDOM from "react-dom/client";
 import { createBrowserRouter, RouterProvider } from "react-router-dom";
-import { HelmetProvider } from "react-helmet-async";
 
 // Global CSS
 import "./index.css";
@@ -26,7 +25,7 @@ import Notifications from "@page/Notifications/Notifications";
 import Logout from "@page/Logout/Logout";
 
 // Dashboard Tools
-import Marker from "@page/Dashboard/tools/Marker.jsx";
+import Marker from "@page/Marker/Marker.jsx";
 
 const router = createBrowserRouter([
   {
@@ -59,7 +58,5 @@ const router = createBrowserRouter([
 ]);
 
 ReactDOM.createRoot(document.getElementById("root")).render(
-  <HelmetProvider>
-    <RouterProvider router={router} />
-  </HelmetProvider>
+  <RouterProvider router={router} />
 );

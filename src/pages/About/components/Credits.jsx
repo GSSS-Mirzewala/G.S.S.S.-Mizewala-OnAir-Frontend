@@ -1,7 +1,13 @@
 // Data
 import CREDITS_LIST from "@/data/Credits_List";
 
+// Local Modules
+import useHead from "@hooks/Head.jsx";
+
 function Credits() {
+  useHead({
+    title: "Credits | G.S.S.S. Mirzewala",
+  });
   return (
     <div className="p-4">
       <ul className="flex flex-col gap-4 list-disc px-0 md:px-8">

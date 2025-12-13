@@ -1,17 +1,18 @@
 // External Modules
 import { Form, Link } from "react-router-dom";
-
-// React Hooks
-import { use, useEffect, useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 // Local Modules
 import { useBSF } from "@hooks/SecurityHooks";
-import api from "@utils/api";
 import API_Loader from "@components/API_Loader";
 import API_Status from "@components/API_Status";
 import { User_Actions } from "@/store/slices/UserSlice";
+import useHead from "@hooks/Head.jsx";
+
+// Utilities
+import api from "@utils/api";
 
 // Icons
 import Open_Eye from "@icons/Open_Eye.svg";
@@ -21,6 +22,9 @@ import Close_Eye from "@icons/Close_Eye.svg";
 import styles from "./Login.module.css";
 
 function Login() {
+  useHead({
+    title: "Login | G.S.S.S. Mirzewala",
+  });
   // Declarations
   const navigate = useNavigate();
   const dispatch = useDispatch();
