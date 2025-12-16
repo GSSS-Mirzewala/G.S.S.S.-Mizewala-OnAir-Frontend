@@ -32,19 +32,19 @@ function Help() {
     const concern = useBRTSF(Concern);
 
     try {
+      SET_ERROR(null);
+      SET_SUCCESS(null);
       SET_API_CALLED(true);
       const response = await api("POST", "help/submit", false, {
         email,
         concern,
       });
 
-      if (response.status === 200 && response.data.success) {
-        SET_SUCCESS(
-          "Your help request has been submitted! We'll get back to you soon!"
-        );
-      }
+      SET_SUCCESS(response.data.message);
+      SET_Email("");
+      SET_Concern("");
     } catch (error) {
-      SET_ERROR(error.message);
+      SET_ERROR(error?.message || "Failed to submit help request");
     } finally {
       SET_API_CALLED(false);
     }
@@ -105,7 +105,6 @@ function Help() {
               className={
                 "bg-black text-white font-inter w-fit rounded-sm cursor-pointer font-semibold px-6 py-2"
               }
-              disabled={API_CALLED}
             >
               {ERROR !== null ? "Retry" : "Submit"}
             </button>

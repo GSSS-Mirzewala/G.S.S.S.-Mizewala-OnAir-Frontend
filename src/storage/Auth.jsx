@@ -6,16 +6,16 @@ import { useDispatch } from "react-redux";
 import api from "@utils/api.js";
 import { User_Actions } from "@/store/slices/UserSlice";
 
-const AuthContext = createContext();
-export default AuthContext;
-
 export const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
 
   useEffect(() => {
-    api("GET", "auth/me").then((response) => {
-      if (response.status === 200 && response.data.success) {
+    const checkAuth = async () => {
+      try {
+        const response = await api("GET", "auth/me", true);
+
         const { name, userType, gender, photoUrl } = response.data.mongodata;
+
         dispatch(
           User_Actions.SET_USER({
             name,
@@ -24,8 +24,13 @@ export const AuthProvider = ({ children }) => {
             photoUrl,
           })
         );
+      } catch {
+        dispatch(User_Actions.LOGOUT());
       }
-    });
-  }, []);
-  return <AuthContext.Provider value={""}>{children}</AuthContext.Provider>;
+    };
+
+    checkAuth();
+  }, [dispatch]);
+
+  return children;
 };

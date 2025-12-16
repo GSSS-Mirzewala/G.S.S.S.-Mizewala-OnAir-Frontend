@@ -55,6 +55,7 @@ function Login() {
     const password = useBSF(Password);
 
     try {
+      SET_ERROR(null);
       SET_API_CALLED(true);
       const response = await api("POST", "auth/login", true, {
         ustaPin,
@@ -97,11 +98,9 @@ function Login() {
           );
         }
         navigate("/");
-      } else {
-        SET_ERROR(response.data.message);
       }
     } catch (error) {
-      SET_ERROR(error.message);
+      SET_ERROR(error?.message || "Something went wrong!");
     } finally {
       SET_API_CALLED(false);
     }

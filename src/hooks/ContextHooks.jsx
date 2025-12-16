@@ -10,8 +10,3 @@ export const usePreference = () => useContext(PrefContext);
 import HolidayContext from "@/storage/Holiday";
 
 export const useHoliday = () => useContext(HolidayContext);
-
-// 3. Auth Context
-import AuthContext from "@/storage/Auth";
-
-export const useAuth = () => useContext(AuthContext);
