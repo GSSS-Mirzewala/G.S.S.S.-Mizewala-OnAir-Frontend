@@ -45,7 +45,7 @@ function Preview({ UPDATE_PREVIEW_STATE }) {
                 Name={STD.Name}
                 Father={STD.Father}
                 Status={STD.Status}
-                key={STD.USTA_PIN}
+                key={STD.MI_PIN}
               />
             );
           })
@@ -62,12 +62,12 @@ export async function PreviewAction({ request }) {
   const store = useSelector((store) => store.MARKER_SHEET);
 
   // Sanitizing Data
-  const USTA_PIN = useBSF(formData.get("USTA_PIN"));
+  const MI_PIN = useBSF(formData.get("MI_PIN"));
   const Password = useBSF(formData.get("Password"));
 
   // Creating Credentials Object
   const Credentials = {
-    USTA_PIN: USTA_PIN,
+    MI_PIN: MI_PIN,
     Password: Password,
   };
 

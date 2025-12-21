@@ -1,9 +1,9 @@
 const CardInfo = [
   {
     SERIAL_NUMBER: 1,
-    QUESTION: "Forgot USTA PIN or Password?",
+    QUESTION: "Forgot MI PIN or Password?",
     ANSWER:
-      "If you forgot your USTA PIN (Unique Student, Teacher, or Administrator PIN) or password, please contact your School Administration. They will help you recover or reset your credentials.",
+      "If you forgot your MI PIN (Member Identification PIN) or password, please contact your School Administration. They will help you recover or reset your credentials.",
   },
   {
     SERIAL_NUMBER: 2,

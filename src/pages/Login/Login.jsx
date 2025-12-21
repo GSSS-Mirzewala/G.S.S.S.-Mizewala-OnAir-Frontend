@@ -10,8 +10,6 @@ import API_Loader from "@components/API_Loader";
 import API_Status from "@components/API_Status";
 import { User_Actions } from "@/store/slices/UserSlice";
 import useHead from "@hooks/Head.jsx";
-
-// Utilities
 import api from "@utils/api";
 
 // Icons
@@ -30,7 +28,7 @@ function Login() {
   const dispatch = useDispatch();
 
   // States
-  const [USTA_PIN, SET_USTA_PIN] = useState("");
+  const [MI_PIN, SET_MI_PIN] = useState("");
   const [Password, SET_Password] = useState("");
 
   const [API_CALLED, SET_API_CALLED] = useState(false);
@@ -51,52 +49,26 @@ function Login() {
     e.preventDefault();
 
     // Sanitizing Data
-    const ustaPin = useBSF(USTA_PIN);
+    const miPin = useBSF(MI_PIN);
     const password = useBSF(Password);
 
     try {
       SET_ERROR(null);
       SET_API_CALLED(true);
       const response = await api("POST", "auth/login", true, {
-        ustaPin,
+        miPin,
         password,
       });
       if (response.status === 200 && response.data.success) {
         const { name, userType, gender, photoUrl } = response.data.mongodata;
-        if (userType === "STD") {
-          const { studentRef } = response.data.mongodata;
-          dispatch(
-            User_Actions.SET_USER({
-              name,
-              userType,
-              gender,
-              studentRef,
-              photoUrl,
-            })
-          );
-        } else if (userType === "TCH") {
-          const { teacherRef } = response.data.mongodata;
-          dispatch(
-            User_Actions.SET_USER({
-              name,
-              userType,
-              gender,
-              teacherRef,
-              photoUrl,
-            })
-          );
-        } else {
-          const { adminRef } = response.data.mongodata;
-          dispatch(
-            User_Actions.SET_USER({
-              name,
-              userType,
-              gender,
-              adminRef,
-              photoUrl,
-            })
-          );
-        }
+        dispatch(
+          User_Actions.SET_USER({
+            name,
+            userType,
+            gender,
+            photoUrl,
+          })
+        );
         navigate("/");
       }
     } catch (error) {
@@ -145,21 +117,21 @@ function Login() {
         <div className="w-full flex flex-col gap-4 py-2 mt-10">
           <div className="w-[95%] flex flex-col gap-2">
             <label
-              htmlFor="USTA_PIN"
+              htmlFor="miPin"
               className={`text-base font-medium font-inter`}
             >
-              USTA PIN
+              MI PIN
             </label>
             <div className="w-[100%] flex flex-row items-center gap-2 pr-2 border-2 border-[#c0c0c0] rounded-sm shadow-sm hover:border-blue-600 transition-colors ease-in-out duration-300">
               <input
                 type="text"
                 className={styles.INPUTS}
                 required
-                id="USTA_PIN"
-                value={USTA_PIN}
+                id="miPin"
+                value={MI_PIN}
                 minLength={11}
                 maxLength={11}
-                onChange={(e) => SET_USTA_PIN(e.target.value)}
+                onChange={(e) => SET_MI_PIN(e.target.value)}
               />
             </div>
           </div>

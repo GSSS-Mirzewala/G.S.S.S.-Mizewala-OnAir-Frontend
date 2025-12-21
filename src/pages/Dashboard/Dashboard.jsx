@@ -15,8 +15,8 @@ function Dashboard() {
   const USER = useSelector((store) => store.USER);
   return (
     <>
-      {USER.userType === "TCH" && <Teacher />}
-      {USER.userType === "STD" && <Student />}
+      {USER.userType === "Teacher" && <Teacher />}
+      {USER.userType === "Student" && <Student />}
     </>
   );
 }

@@ -1,7 +1,8 @@
 // External Modules
 import { format, getYear } from "date-fns";
 import { useEffect, useState } from "react";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
 
 // Assets
 import Avatar from "@/assets/public/Avatar.svg";
@@ -16,36 +17,24 @@ import Preview from "../Dashboard/components/Preview";
 import Message from "@components/Message";
 import useHead from "@hooks/Head.jsx";
 import { MarkerActions } from "@/store/slices/MarkerSlice";
-
-// Utilities
 import api from "@utils/api";
 
 function Marker() {
+  const USER = useSelector((store) => store.USER);
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  // States
+  const [MESSAGE, SET_MESSAGE] = useState();
+  const [PREVIEW_STATE, UPDATE_PREVIEW_STATE] = useState("hidden");
+  const [STD_LIST, UPDATE_STD_LIST] = useState([]);
+
+  const assignedClass = USER.assignedClass;
+
   useHead({
     title: "Marker | G.S.S.S. Mirzewala",
   });
-  const [PREVIEW_STATE, UPDATE_PREVIEW_STATE] = useState("hidden");
-  const [Class, SetClass] = useState(9);
-  const dispatch = useDispatch();
 
-  function handleMarkAttendence(entry) {
-    UPDATE_STD_LIST(
-      STD_LIST.map((STD) => {
-        if (STD.ID === entry.ID) {
-          return { ...STD, marked: true };
-        }
-        return STD;
-      })
-    );
-    dispatch(MarkerActions.Mark(entry));
-  }
-
-  // Using Hooks
-  const { isHoliday } = useHoliday();
-
-  // States
-  const [STD_LIST, UPDATE_STD_LIST] = useState([]);
-  const [MESSAGE, SET_MESSAGE] = useState();
   const Messages = [
     "☕ Take a break! Attendance is also sipping chai today.",
     "🏖️ It’s a holiday! If you try marking attendance, even the system will say ‘chill karo’ 😌",
@@ -61,13 +50,32 @@ function Marker() {
   }
 
   useEffect(() => {
-    api("GET", `tch/get/students/class/${Class}`).then((res) => {
-      if (res.status === 200 && res.data.success) {
-        UPDATE_STD_LIST(res.data.mongodata);
-      }
-    });
+    if (USER.assignedClass === null) {
+      navigate("/");
+    } else {
+      api("GET", `u/t/class/:class/${assignedClass}`).then((res) => {
+        if (res.status === 200 && res.data.success) {
+          UPDATE_STD_LIST(res.data.mongodata);
+        }
+      });
+    }
     SET_MESSAGE(GetNotificationMessage());
   }, []);
+
+  function handleMarkAttendence(entry) {
+    UPDATE_STD_LIST(
+      STD_LIST.map((STD) => {
+        if (STD.ID === entry.ID) {
+          return { ...STD, marked: true };
+        }
+        return STD;
+      })
+    );
+    dispatch(MarkerActions.Mark(entry));
+  }
+
+  // Using Hooks
+  const { isHoliday } = useHoliday();
 
   // Preview
   function handlePreview() {
@@ -90,7 +98,7 @@ function Marker() {
               {getYear(new Date())}
             </span>
             <span className="text-lg max-sm:text-base font-semibold text-red-500">
-              Class {Class}
+              Class {assignedClass}
             </span>
             <button
               type="button"
@@ -115,11 +123,11 @@ function Marker() {
                 <MarkerStudentRow
                   ID={info._id}
                   Avatar={Avatar} // Temporary
-                  USTA_PIN={info.ustaPin}
+                  MI_PIN={info.miPin}
                   Name={info.name}
                   Father={info.studentRef.fatherName}
                   isMarked={info.marked}
-                  key={info.ustaPin}
+                  key={info.miPin}
                   Mark={handleMarkAttendence}
                 />
               );

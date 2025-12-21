@@ -1,9 +1,9 @@
-function MarkStatus({ STD_USTA_PIN, Text, Background, Status, Mark }) {
+function MarkStatus({ STD_MI_PIN, Text, Background, Status, Mark }) {
   return (
     <label className="relative cursor-pointer">
       <input
         type="radio"
-        name={`STATUS-${STD_USTA_PIN}`}
+        name={`STATUS-${STD_MI_PIN}`}
         value={Status}
         className="peer hidden"
         onClick={() => {

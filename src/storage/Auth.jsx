@@ -1,5 +1,5 @@
 // External Modules
-import { createContext, useEffect } from "react";
+import { useEffect } from "react";
 import { useDispatch } from "react-redux";
 
 // Local Modules
@@ -13,9 +13,7 @@ export const AuthProvider = ({ children }) => {
     const checkAuth = async () => {
       try {
         const response = await api("GET", "auth/me", true);
-
         const { name, userType, gender, photoUrl } = response.data.mongodata;
-
         dispatch(
           User_Actions.SET_USER({
             name,
