@@ -3,7 +3,7 @@ import axios from "axios";
 
 async function api(REQUEST_TYPE, END_POINT, WITH_CREDENTIALS = true, DATA) {
   try {
-    const API_URI = `http://${
+    const API_URI = `https://${
       import.meta.env.VITE_API_BASE_URL
     }/api/${END_POINT}`;
     if (REQUEST_TYPE === "GET") {
