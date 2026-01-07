@@ -1,0 +1,48 @@
+// External Modules
+import { createSlice } from "@reduxjs/toolkit";
+
+const INITIAL_STATE = {
+  teacherInfo: {
+    status: null,
+    assignedClass: null,
+    subject: null,
+    designation: null,
+    qualifications: [],
+    dateOfJoining: null,
+  },
+  studentInfo: {
+    class: null,
+    fatherName: null,
+    motherName: null,
+    rollNumber: null,
+    section: null,
+  },
+};
+
+const SpecialInfoSlice = createSlice({
+  name: "SpecialInfoSlice",
+  initialState: INITIAL_STATE,
+  reducers: {
+    SETUP_TEACHER: (state, action) => {
+      state.teacherInfo.status = action.payload.status;
+      state.teacherInfo.assignedClass = action.payload.assignedClass;
+      state.teacherInfo.subject = action.payload.subject;
+      state.teacherInfo.designation = action.payload.designation;
+      state.teacherInfo.qualifications = action.payload.qualifications;
+      state.teacherInfo.dateOfJoining = action.payload.dateOfJoining;
+    },
+    SETUP_STUDENT: (state, action) => {
+      state.studentInfo.class = action.payload.class;
+      state.studentInfo.fatherName = action.payload.fatherName;
+      state.studentInfo.motherName = action.payload.motherName;
+      state.studentInfo.rollNumber = action.payload.rollNumber;
+      state.studentInfo.section = action.payload.section;
+    },
+    LOGOUT: (state) => {
+      state = INITIAL_STATE;
+    },
+  },
+});
+
+export const SpecialInfoActions = SpecialInfoSlice.actions;
+export default SpecialInfoSlice.reducer;

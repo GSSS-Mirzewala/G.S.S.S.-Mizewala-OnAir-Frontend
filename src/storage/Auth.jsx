@@ -4,7 +4,8 @@ import { useDispatch } from "react-redux";
 
 // Local Modules
 import api from "@utils/api.js";
-import { User_Actions } from "@/store/slices/UserSlice";
+import { CommonInfoActions } from "@/store/slices/CommonInfoSlice";
+import { SpecialInfoActions } from "@/store/slices/SpecialInfoSlice";
 
 export const AuthProvider = ({ children }) => {
   const dispatch = useDispatch();
@@ -13,17 +14,27 @@ export const AuthProvider = ({ children }) => {
     const checkAuth = async () => {
       try {
         const response = await api("GET", "auth/me", true);
-        const { name, userType, gender, photoUrl } = response.data.mongodata;
         dispatch(
-          User_Actions.SET_USER({
-            name,
-            userType,
-            gender,
-            photoUrl,
+          CommonInfoActions.SETUP_NEW_USER({
+            ...response.data.mongodata.common,
           })
         );
+        if (response.data.mongodata.common.userType === "Teacher") {
+          dispatch(
+            SpecialInfoActions.SETUP_TEACHER({
+              ...response.data.mongodata.special,
+            })
+          );
+        } else if (response.data.mongodata.common.userType === "Student") {
+          dispatch(
+            SpecialInfoActions.SETUP_STUDENT({
+              ...response.data.mongodata.special,
+            })
+          );
+        }
       } catch {
-        dispatch(User_Actions.LOGOUT());
+        dispatch(CommonInfoActions.LOGOUT());
+        dispatch(SpecialInfoActions.LOGOUT());
       }
     };
 

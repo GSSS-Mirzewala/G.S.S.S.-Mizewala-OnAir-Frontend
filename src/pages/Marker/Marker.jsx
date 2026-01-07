@@ -4,9 +4,6 @@ import { useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
-// Assets
-import Avatar from "@/assets/public/Avatar.svg";
-
 // Graphics
 import Holiday_Light from "@graphics/Holiday_Light.svg";
 
@@ -20,7 +17,7 @@ import { MarkerActions } from "@/store/slices/MarkerSlice";
 import api from "@utils/api";
 
 function Marker() {
-  const USER = useSelector((store) => store.USER);
+  const SP_USER = useSelector((store) => store.SPECIAL_INFO);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -28,8 +25,6 @@ function Marker() {
   const [MESSAGE, SET_MESSAGE] = useState();
   const [PREVIEW_STATE, UPDATE_PREVIEW_STATE] = useState("hidden");
   const [STD_LIST, UPDATE_STD_LIST] = useState([]);
-
-  const assignedClass = USER.assignedClass;
 
   useHead({
     title: "Marker | G.S.S.S. Mirzewala",
@@ -50,14 +45,16 @@ function Marker() {
   }
 
   useEffect(() => {
-    if (USER.assignedClass === null) {
+    if (SP_USER.teacherInfo.assignedClass === null) {
       navigate("/");
     } else {
-      api("GET", `u/t/class/:class/${assignedClass}`).then((res) => {
-        if (res.status === 200 && res.data.success) {
-          UPDATE_STD_LIST(res.data.mongodata);
+      api("GET", `u/t/class/${SP_USER.teacherInfo.assignedClass}`).then(
+        (res) => {
+          if (res.status === 200 && res.data.success) {
+            UPDATE_STD_LIST(res.data.mongodata);
+          }
         }
-      });
+      );
     }
     SET_MESSAGE(GetNotificationMessage());
   }, []);
@@ -98,7 +95,7 @@ function Marker() {
               {getYear(new Date())}
             </span>
             <span className="text-lg max-sm:text-base font-semibold text-red-500">
-              Class {assignedClass}
+              Class {SP_USER.teacherInfo.assignedClass}
             </span>
             <button
               type="button"
@@ -118,16 +115,18 @@ function Marker() {
                 </div>
               </>
             )}
+            {console.log(STD_LIST)}
             {STD_LIST.map((info) => {
+              console.log(info);
               return (
                 <MarkerStudentRow
                   ID={info._id}
-                  Avatar={Avatar} // Temporary
                   MI_PIN={info.miPin}
                   Name={info.name}
-                  Father={info.studentRef.fatherName}
+                  avatarUrl={info.avatarUrl}
+                  Father={info.fatherName}
                   isMarked={info.marked}
-                  key={info.miPin}
+                  key={info._id}
                   Mark={handleMarkAttendence}
                 />
               );

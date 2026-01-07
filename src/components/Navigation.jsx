@@ -10,7 +10,7 @@ import About from "@icons/About.svg";
 import Notifications from "@icons/Notifications.svg";
 
 function Navigation() {
-  const USER = useSelector((store) => store.USER);
+  const USER = useSelector((store) => store.COMMON_INFO);
   return (
     <div className="flex md:hidden fixed bottom-0 w-full items-center justify-between px-8 pt-4 pb-6 bg-white gap-1">
       <div>

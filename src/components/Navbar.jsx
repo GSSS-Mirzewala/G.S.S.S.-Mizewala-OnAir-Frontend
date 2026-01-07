@@ -11,11 +11,8 @@ import Dashboard from "@icons/Dashboard.svg";
 import About from "@icons/About.svg";
 import Notifications from "@icons/Notifications.svg";
 
-// Assets
-import Avatar from "@/assets/public/Avatar.svg";
-
 function Navbar() {
-  const USER = useSelector((store) => store.USER);
+  const USER = useSelector((store) => store.COMMON_INFO);
   return (
     <nav className="flex items-center justify-between w-full p-4 bg-white shadow-md">
       <div>
@@ -66,7 +63,7 @@ function Navbar() {
             type="button"
           >
             <img
-              src={Avatar}
+              src={USER.avatarUrl}
               width={24}
               height={24}
               alt="Avatar"

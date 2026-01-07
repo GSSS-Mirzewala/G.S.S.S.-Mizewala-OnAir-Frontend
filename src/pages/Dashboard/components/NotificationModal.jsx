@@ -8,14 +8,13 @@ import { useSelector } from "react-redux";
 import { Form, Link } from "react-router-dom";
 
 // Icons
-import Avatar from "@/assets/public/Avatar.svg";
 import Clock from "@icons/Clock.svg";
 import Image from "@icons/Image.svg";
 import Send from "@icons/Send.svg";
 import Synchronize from "@icons/Synchronize.svg";
 
 function NotificationModal({ UPDATE_MODAL_STATE }) {
-  const USER = useSelector((store) => store.USER);
+  const USER = useSelector((store) => store.COMMON_INFO);
   // Who can see the Notification?
   const [CAN_VIEW, SET_CAN_VIEW] = useState("Who can see your Notification?");
 
@@ -62,7 +61,7 @@ function NotificationModal({ UPDATE_MODAL_STATE }) {
       </div>
       <hr />
       <div className="flex items-start gap-3 p-3">
-        <img width={40} height={40} src={Avatar} alt="Avatar" />
+        <img width={40} height={40} src={USER.avatarUrl} alt="Avatar" />
         <div className="w-full flex flex-col">
           <Link to="" className="font-semibold">
             {USER.name}

@@ -8,7 +8,6 @@ import { useDispatch } from "react-redux";
 import { useBSF } from "@hooks/SecurityHooks";
 import API_Loader from "@components/API_Loader";
 import API_Status from "@components/API_Status";
-import { User_Actions } from "@/store/slices/UserSlice";
 import useHead from "@hooks/Head.jsx";
 import api from "@utils/api";
 
@@ -18,6 +17,8 @@ import Close_Eye from "@icons/Close_Eye.svg";
 
 // Styles
 import styles from "./Login.module.css";
+import { SpecialInfoActions } from "@/store/slices/SpecialInfoSlice";
+import { CommonInfoActions } from "@/store/slices/CommonInfoSlice";
 
 function Login() {
   useHead({
@@ -59,18 +60,25 @@ function Login() {
         miPin,
         password,
       });
-      if (response.status === 200 && response.data.success) {
-        const { name, userType, gender, photoUrl } = response.data.mongodata;
+      dispatch(
+        CommonInfoActions.SETUP_NEW_USER({
+          ...response.data.mongodata.common,
+        })
+      );
+      if (response.data.mongodata.common.userType === "Teacher") {
         dispatch(
-          User_Actions.SET_USER({
-            name,
-            userType,
-            gender,
-            photoUrl,
+          SpecialInfoActions.SETUP_TEACHER({
+            ...response.data.mongodata.special,
           })
         );
-        navigate("/");
+      } else if (response.data.mongodata.common.userType === "Student") {
+        dispatch(
+          SpecialInfoActions.SETUP_STUDENT({
+            ...response.data.mongodata.special,
+          })
+        );
       }
+      navigate("/");
     } catch (error) {
       SET_ERROR(error?.message || "Something went wrong!");
     } finally {
