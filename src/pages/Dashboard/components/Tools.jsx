@@ -10,7 +10,7 @@ import MarkerIcon from "@icons/Marker.svg";
 import MusicIcon from "@icons/Music.svg";
 
 function Tools() {
-  const SP_INFO = useSelector((store) => store.SPECIAL_INFO);
+  const SP_INFO = useSelector((store) => store.SPECIAL_IDENTITY);
   const navigate = useNavigate();
   return (
     <div className="w-full bg-white p-8 rounded-sm flex flex-row items-center justify-between overflow-x-auto gap-8 scroll-smooth">

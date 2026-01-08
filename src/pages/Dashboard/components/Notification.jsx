@@ -2,7 +2,7 @@
 import { useSelector } from "react-redux";
 
 function Notification({ UPDATE_MODAL_STATE }) {
-  const USER = useSelector((store) => store.COMMON_INFO);
+  const USER = useSelector((store) => store.COMMON_IDENTITY);
   return (
     <div className="w-full flex flex-row items-center justify-between p-4 rounded-sm  bg-white">
       <div className="w-full flex flex-row items-center gap-2">

@@ -2,7 +2,7 @@
 import { Form, Link } from "react-router-dom";
 import { useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 
 // Local Modules
 import { useBSF } from "@hooks/SecurityHooks";
@@ -10,6 +10,8 @@ import API_Loader from "@components/API_Loader";
 import API_Status from "@components/API_Status";
 import useHead from "@hooks/Head.jsx";
 import api from "@utils/api";
+import { SpecialIdentityActions } from "@/store/slices/SpecialIdentitySlice";
+import { CommonIdentityActions } from "@/store/slices/CommonIdentitySlice";
 
 // Icons
 import Open_Eye from "@icons/Open_Eye.svg";
@@ -17,14 +19,13 @@ import Close_Eye from "@icons/Close_Eye.svg";
 
 // Styles
 import styles from "./Login.module.css";
-import { SpecialInfoActions } from "@/store/slices/SpecialInfoSlice";
-import { CommonInfoActions } from "@/store/slices/CommonInfoSlice";
 
 function Login() {
   useHead({
     title: "Login | G.S.S.S. Mirzewala",
   });
   // Declarations
+  const USER = useSelector((store) => store.COMMON_IDENTITY);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
@@ -61,19 +62,19 @@ function Login() {
         password,
       });
       dispatch(
-        CommonInfoActions.SETUP_NEW_USER({
+        CommonIdentityActions.SETUP_NEW_USER({
           ...response.data.mongodata.common,
         })
       );
       if (response.data.mongodata.common.userType === "Teacher") {
         dispatch(
-          SpecialInfoActions.SETUP_TEACHER({
+          SpecialIdentityActions.SETUP_TEACHER({
             ...response.data.mongodata.special,
           })
         );
       } else if (response.data.mongodata.common.userType === "Student") {
         dispatch(
-          SpecialInfoActions.SETUP_STUDENT({
+          SpecialIdentityActions.SETUP_STUDENT({
             ...response.data.mongodata.special,
           })
         );
@@ -99,7 +100,9 @@ function Login() {
   }
 
   useEffect(() => {
-    // navigate("/"); Navigate if User if LoggedIn
+    if (USER.isLoggedIn) {
+      navigate("/");
+    }
   }, [navigate]);
 
   return (

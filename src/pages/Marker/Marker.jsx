@@ -17,7 +17,7 @@ import { MarkerActions } from "@/store/slices/MarkerSlice";
 import api from "@utils/api";
 
 function Marker() {
-  const SP_USER = useSelector((store) => store.SPECIAL_INFO);
+  const SP_USER = useSelector((store) => store.SPECIAL_IDENTITY);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -48,7 +48,7 @@ function Marker() {
     if (SP_USER.teacherInfo.assignedClass === null) {
       navigate("/");
     } else {
-      api("GET", `u/t/class/${SP_USER.teacherInfo.assignedClass}`).then(
+      api("GET", `u/t/marker/class/${SP_USER.teacherInfo.assignedClass}`).then(
         (res) => {
           if (res.status === 200 && res.data.success) {
             UPDATE_STD_LIST(res.data.mongodata);
@@ -115,9 +115,7 @@ function Marker() {
                 </div>
               </>
             )}
-            {console.log(STD_LIST)}
             {STD_LIST.map((info) => {
-              console.log(info);
               return (
                 <MarkerStudentRow
                   ID={info._id}

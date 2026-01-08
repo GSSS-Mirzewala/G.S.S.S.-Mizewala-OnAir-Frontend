@@ -6,8 +6,8 @@ import { useDispatch } from "react-redux";
 // Local Modules
 import api from "@utils/api";
 import useHead from "@hooks/Head.jsx";
-import { CommonInfoActions } from "@/store/slices/CommonInfoSlice";
-import { SpecialInfoActions } from "@/store/slices/SpecialInfoSlice";
+import { CommonIdentityActions } from "@/store/slices/CommonIdentitySlice";
+import { SpecialIdentityActions } from "@/store/slices/SpecialIdentitySlice";
 
 function Logout() {
   useHead({
@@ -20,9 +20,9 @@ function Logout() {
   useEffect(() => {
     const logout = async () => {
       try {
-        await api("POST", "auth/logout", true, {});
-        dispatch(CommonInfoActions.LOGOUT());
-        dispatch(SpecialInfoActions.LOGOUT());
+        await api("POST", "auth/logout", true);
+        dispatch(CommonIdentityActions.LOGOUT());
+        dispatch(SpecialIdentityActions.LOGOUT());
       } catch (error) {
         console.error(error?.message || "Failed to Logout");
       } finally {

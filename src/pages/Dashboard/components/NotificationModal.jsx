@@ -14,7 +14,7 @@ import Send from "@icons/Send.svg";
 import Synchronize from "@icons/Synchronize.svg";
 
 function NotificationModal({ UPDATE_MODAL_STATE }) {
-  const USER = useSelector((store) => store.COMMON_INFO);
+  const USER = useSelector((store) => store.COMMON_IDENTITY);
   // Who can see the Notification?
   const [CAN_VIEW, SET_CAN_VIEW] = useState("Who can see your Notification?");
 
@@ -44,10 +44,7 @@ function NotificationModal({ UPDATE_MODAL_STATE }) {
   }
 
   return (
-    <Form
-      method="POST"
-      className="bg-white min-w-[500px] max-md:min-w-[350px] max-w-[500px] max-md:max-w-[350px] rounded-[10px] shadow-lg"
-    >
+    <Form className="bg-white min-w-[500px] max-md:min-w-[350px] max-w-[500px] max-md:max-w-[350px] rounded-[10px] shadow-lg">
       <div className="flex items-center justify-between py-3 px-4">
         <button
           type="button"

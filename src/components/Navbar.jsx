@@ -12,7 +12,7 @@ import About from "@icons/About.svg";
 import Notifications from "@icons/Notifications.svg";
 
 function Navbar() {
-  const USER = useSelector((store) => store.COMMON_INFO);
+  const USER = useSelector((store) => store.COMMON_IDENTITY);
   return (
     <nav className="flex items-center justify-between w-full p-4 bg-white shadow-md">
       <div>

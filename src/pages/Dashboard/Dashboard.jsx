@@ -12,7 +12,7 @@ function Dashboard() {
   useHead({
     title: "Dashboard | G.S.S.S. Mirzewala",
   });
-  const USER = useSelector((store) => store.COMMON_INFO);
+  const USER = useSelector((store) => store.COMMON_IDENTITY);
   return (
     <>
       {USER.userType === "Teacher" && <Teacher />}

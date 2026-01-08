@@ -19,8 +19,8 @@ const INITIAL_STATE = {
   },
 };
 
-const SpecialInfoSlice = createSlice({
-  name: "SpecialInfoSlice",
+const SpecialIdentitySlice = createSlice({
+  name: "SpecialIdentity",
   initialState: INITIAL_STATE,
   reducers: {
     SETUP_TEACHER: (state, action) => {
@@ -38,11 +38,9 @@ const SpecialInfoSlice = createSlice({
       state.studentInfo.rollNumber = action.payload.rollNumber;
       state.studentInfo.section = action.payload.section;
     },
-    LOGOUT: (state) => {
-      state = INITIAL_STATE;
-    },
+    LOGOUT: () => INITIAL_STATE,
   },
 });
 
-export const SpecialInfoActions = SpecialInfoSlice.actions;
-export default SpecialInfoSlice.reducer;
+export const SpecialIdentityActions = SpecialIdentitySlice.actions;
+export default SpecialIdentitySlice.reducer;

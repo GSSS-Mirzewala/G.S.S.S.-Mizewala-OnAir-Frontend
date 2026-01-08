@@ -39,6 +39,13 @@ function MarkerStudentRow({ ID, MI_PIN, avatarUrl, Name, Father, Mark }) {
           Status="Absent"
           Mark={handleMarkAttendence}
         />
+        <MarkStatus
+          STD_MI_PIN={MI_PIN}
+          Text="U"
+          Background="bg-black"
+          Status="Unallocated"
+          Mark={handleMarkAttendence}
+        />
       </div>
     </div>
   );
