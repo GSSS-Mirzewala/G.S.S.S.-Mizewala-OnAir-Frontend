@@ -14,6 +14,15 @@ function App() {
   // States
   const [LOADING, SET_LOADING] = useState(false);
 
+  // Functions
+  function sendHeartBeat() {
+    try {
+      api("POST", "i/heartbeat");
+    } catch (error) {
+      console.error(error?.message || "Failed to verify Heartbeat");
+    }
+  }
+
   useEffect(() => {
     async function checkHealth() {
       try {
@@ -39,6 +48,11 @@ function App() {
     if (!sessionStorage.getItem("appLoader")) {
       checkHealth();
     }
+
+    sendHeartBeat();
+    const heatBeatInterval = setInterval(sendHeartBeat, 30000); // Every 30 Seconds
+
+    return () => clearInterval(heatBeatInterval);
   }, []);
 
   if (LOADING) {
