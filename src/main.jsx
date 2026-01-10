@@ -20,9 +20,10 @@ import Login from "@page/Login/Login";
 import Help from "@page/Help/Help";
 import About from "@page/About/About";
 import Gallery from "@page/Gallery/Gallery";
-import Dashboard from "@page/Dashboard/Dashboard";
+import Profile from "@page/Profile/Profile";
 import Notifications from "@page/Notifications/Notifications";
 import Logout from "@page/Logout/Logout";
+import Dashboard from "@page/Dashboard/Dashboard";
 
 // Dashboard Tools
 import Marker from "@page/Marker/Marker.jsx";
@@ -40,6 +41,7 @@ const router = createBrowserRouter([
           { path: "credits", element: <About /> },
           { path: "gallery", element: <Gallery /> },
           { path: "notifications", element: <Notifications /> },
+          { path: "profile", element: <Profile /> },
           { path: "dashboard", element: <Dashboard /> },
           { path: "dashboard/marker", element: <Marker /> },
         ],

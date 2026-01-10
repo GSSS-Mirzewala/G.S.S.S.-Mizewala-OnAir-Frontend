@@ -1,5 +1,4 @@
 // Dependencies
-import { useEffect, useState } from "react";
 import { Outlet } from "react-router-dom";
 
 // Local Components
@@ -14,7 +13,7 @@ function Classic() {
       <header>
         <Navbar />
       </header>
-      <main>
+      <main className="min-h-screen">
         <Hero>
           <Outlet />
         </Hero>
