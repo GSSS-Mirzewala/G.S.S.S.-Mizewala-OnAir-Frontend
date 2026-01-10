@@ -1,6 +1,6 @@
 // External Modules
 import { Form, Link } from "react-router-dom";
-import { useEffect, useRef, useState } from "react";
+import { useContext, useEffect, useRef, useState } from "react";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -9,6 +9,7 @@ import { useBSF } from "@hooks/SecurityHooks";
 import API_Loader from "@components/API_Loader";
 import API_Status from "@components/API_Status";
 import useHead from "@hooks/Head.jsx";
+import { APIsContext } from "@/storage/APIs";
 import api from "@utils/api";
 import { SpecialIdentityActions } from "@/store/slices/SpecialIdentitySlice";
 import { CommonIdentityActions } from "@/store/slices/CommonIdentitySlice";
@@ -26,14 +27,14 @@ function Login() {
   });
   // Declarations
   const USER = useSelector((store) => store.COMMON_IDENTITY);
+  const { LOGIN_API_CALLED, SET_LOGIN_API_CALLED, AUTH_API_CALLED } =
+    useContext(APIsContext);
   const navigate = useNavigate();
   const dispatch = useDispatch();
 
   // States
   const [MI_PIN, SET_MI_PIN] = useState("");
   const [Password, SET_Password] = useState("");
-
-  const [API_CALLED, SET_API_CALLED] = useState(false);
   const [ERROR, SET_ERROR] = useState(null);
 
   const [Password_Visibility, SET_Password_Visibility] = useState("hidden");
@@ -56,7 +57,7 @@ function Login() {
 
     try {
       SET_ERROR(null);
-      SET_API_CALLED(true);
+      SET_LOGIN_API_CALLED(true);
       const response = await api("POST", "auth/login", true, {
         miPin,
         password,
@@ -83,7 +84,7 @@ function Login() {
     } catch (error) {
       SET_ERROR(error?.message || "Something went wrong!");
     } finally {
-      SET_API_CALLED(false);
+      SET_LOGIN_API_CALLED(false);
     }
   }
 
@@ -100,10 +101,10 @@ function Login() {
   }
 
   useEffect(() => {
-    if (USER.isLoggedIn) {
+    if (!AUTH_API_CALLED && USER.isLoggedIn) {
       navigate("/");
     }
-  }, [navigate]);
+  }, [AUTH_API_CALLED, navigate]);
 
   return (
     <div className={styles.App}>
@@ -186,7 +187,7 @@ function Login() {
         </div>
         {ERROR !== null && <API_Status type="error" message={ERROR} />}
         <div className="flex flex-col gap-4 mt-4">
-          {API_CALLED && <API_Loader />}
+          {LOGIN_API_CALLED && <API_Loader />}
           <button
             type="submit"
             className={`bg-black text-white font-inter w-fit rounded-sm cursor-pointer font-semibold px-12 py-2`}

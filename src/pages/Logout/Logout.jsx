@@ -21,14 +21,14 @@ function Logout() {
     const logout = async () => {
       try {
         await api("POST", "auth/logout", true);
-        dispatch(CommonIdentityActions.LOGOUT());
-        dispatch(SpecialIdentityActions.LOGOUT());
       } catch (error) {
         console.error(error?.message || "Failed to Logout");
-      } finally {
-        // Always redirect
-        navigate("/login", { replace: true });
       }
+
+      dispatch(CommonIdentityActions.LOGOUT());
+      dispatch(SpecialIdentityActions.LOGOUT());
+
+      navigate("/");
     };
 
     logout();
