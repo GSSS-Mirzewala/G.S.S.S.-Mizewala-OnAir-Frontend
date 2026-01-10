@@ -2,14 +2,11 @@
 import { useEffect, useState } from "react";
 import { addDays, format } from "date-fns";
 
-// Data
-import Information from "@/data/Information";
-
 // Local Components
 import Intro from "./components/Intro";
 import Quote from "./components/Quote";
-import Question from "./components/Question";
 import NewUpdate from "./components/NewUpdate";
+import Questions from "./components/Questions";
 import api from "@utils/api";
 import useHead from "@hooks/Head.jsx";
 
@@ -48,16 +45,9 @@ function Home() {
       {NOTIFY && <NewUpdate SET_NOTIFY={SET_NOTIFY} data={NEW_UPDATE_DATA} />}
       <Quote />
       <Intro />
-      {Information.map((Info, Index) => (
-        <Question
-          key={Index}
-          Title={Info.TITLE}
-          Hindi_Title={Info.HINDI_TITLE}
-          Description={Info.DESCRIPTION}
-          Hindi_Description={Info.HINDI_DESCRIPTION}
-          Color={Info.COLOR}
-        />
-      ))}
+      <section className="flex flex-col gap-4">
+        <Questions />
+      </section>
     </>
   );
 }
