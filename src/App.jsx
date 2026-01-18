@@ -14,7 +14,7 @@ import { APIsContext } from "./storage/APIs";
 
 function App() {
   // Declarations
-  const { AUTH_API_CALLED, LOGIN_API_CALLED } = useContext(APIsContext);
+  const { AUTH_API_CALLED } = useContext(APIsContext);
 
   // States
   const [LOADING, SET_LOADING] = useState(false);
@@ -35,24 +35,21 @@ function App() {
   }
 
   useEffect(() => {
+    checkSession();
+
     if (AUTH_API_CALLED) {
       SET_API_LOADING(true);
     } else {
       SET_API_LOADING(false);
     }
 
-    checkSession();
     heartbeat();
     const heatBeatInterval = setInterval(heartbeat, 30000); // Every 30 Seconds
 
     return () => clearInterval(heatBeatInterval);
   }, [AUTH_API_CALLED]);
 
-  if (API_LOADING) {
-    return <API_Loader />;
-  }
-
-  if (LOADING) {
+  if (API_LOADING || LOADING) {
     return <AppLoader />;
   }
   return <Outlet />;

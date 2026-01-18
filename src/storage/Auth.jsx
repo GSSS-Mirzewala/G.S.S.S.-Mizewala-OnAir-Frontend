@@ -16,23 +16,23 @@ export const AuthProvider = ({ children }) => {
     const checkAuth = async () => {
       try {
         SET_AUTH_API_CALLED(true);
-        const response = await api("GET", "auth/me", true);
+        const response = await api("GET", "u/get/p/me", true);
         dispatch(
           CommonIdentityActions.SETUP_NEW_USER({
             ...response.data.mongodata.common,
-          })
+          }),
         );
         if (response.data.mongodata.common.userType === "Teacher") {
           dispatch(
             SpecialIdentityActions.SETUP_TEACHER({
               ...response.data.mongodata.special,
-            })
+            }),
           );
         } else if (response.data.mongodata.common.userType === "Student") {
           dispatch(
             SpecialIdentityActions.SETUP_STUDENT({
               ...response.data.mongodata.special,
-            })
+            }),
           );
         }
       } catch {
