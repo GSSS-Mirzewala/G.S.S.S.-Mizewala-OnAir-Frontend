@@ -30,7 +30,7 @@ function Banner({ USER_INFO }) {
           <img
             src={USER_INFO?.avatarUrl}
             alt={`${USER_INFO?.name}' Avatar`}
-            style={{ borderRadius: "50%" }}
+            style={{ borderRadius: "50%", maxWidth: "66px", maxHeight: "66px" }}
             className="cursor-pointer"
           />
         </div>
