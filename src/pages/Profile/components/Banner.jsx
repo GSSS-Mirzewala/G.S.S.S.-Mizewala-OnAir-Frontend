@@ -2,7 +2,6 @@
 import VerifiedIcon from "@icons/Verified.svg";
 
 function Banner({ USER_INFO }) {
-  console.log(USER_INFO);
   return (
     <>
       <div className="px-2">
