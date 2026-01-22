@@ -13,8 +13,8 @@ import "./index.css";
 import App from "./App";
 
 // Layouts
-import Minimalist from "@/layouts/Minimalist.jsx";
-import Classic from "@/layouts/Classic.jsx";
+import Minimalist from "@/layouts/Minimalist";
+import Classic from "@/layouts/Classic";
 
 // Pages
 import Home from "@page/Home/Home";
@@ -28,7 +28,8 @@ import Logout from "@page/Logout/Logout";
 import Dashboard from "@page/Dashboard/Dashboard";
 
 // Dashboard Tools
-import Marker from "@page/Marker/Marker.jsx";
+import Marker from "@page/Marker/Marker";
+import Music from "@page/Music/Music";
 
 const router = createBrowserRouter([
   {
@@ -45,6 +46,7 @@ const router = createBrowserRouter([
           { path: "notifications", element: <Notifications /> },
           { path: "profile/", element: <Profile /> },
           { path: "profile/:id", element: <Profile /> },
+          { path: "music", element: <Music /> },
           { path: "dashboard", element: <Dashboard /> },
           { path: "dashboard/marker", element: <Marker /> },
         ],
@@ -64,5 +66,5 @@ const router = createBrowserRouter([
 ReactDOM.createRoot(document.getElementById("root")).render(
   <RootProvider>
     <RouterProvider router={router} />
-  </RootProvider>
+  </RootProvider>,
 );

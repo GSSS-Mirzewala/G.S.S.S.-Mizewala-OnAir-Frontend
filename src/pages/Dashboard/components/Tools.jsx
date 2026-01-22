@@ -60,7 +60,7 @@ function Tools() {
           <button
             className={styles.BUTTON}
             onClick={() => {
-              navigate("/dashboard/music");
+              navigate("/music");
             }}
           >
             Next
