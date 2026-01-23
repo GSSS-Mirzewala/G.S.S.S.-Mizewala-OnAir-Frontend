@@ -1,6 +1,6 @@
 // External Modules
 import { useContext, useEffect } from "react";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 // Local Modules
 import api from "@utils/api.js";
@@ -10,7 +10,6 @@ import { APIsContext } from "./APIs";
 
 export const AuthProvider = ({ children }) => {
   // Declarations
-  const USER = useSelector((store) => store.COMMON_IDENTITY);
   const dispatch = useDispatch();
   const { SET_AUTH_API_CALLED } = useContext(APIsContext);
 
@@ -45,9 +44,7 @@ export const AuthProvider = ({ children }) => {
       }
     };
 
-    if (USER.isLoggedIn) {
-      checkAuth();
-    }
+    checkAuth();
   }, [dispatch]);
 
   return children;
