@@ -12,7 +12,7 @@ function Tools() {
   const SP_INFO = useSelector((store) => store.SPECIAL_IDENTITY);
   const navigate = useNavigate();
   return (
-    <div className="w-full bg-white p-8 rounded-sm flex flex-row items-center justify-between overflow-x-auto gap-8 scroll-smooth">
+    <div className="w-full bg-white rounded-sm flex flex-row items-center justify-between overflow-x-auto gap-8 scroll-smooth">
       {SP_INFO.teacherInfo.assignedClass !== null && (
         <div className={styles.outline}>
           <div className="flex flex-col gap-2">

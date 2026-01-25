@@ -1,11 +1,11 @@
 // Local Modules
-import CreateNotification from "./components/CreateNotification";
+import CreatePost from "./components/CreatePost";
 import Tools from "./components/Tools";
 
 function Teacher() {
   return (
     <>
-      <CreateNotification />
+      <CreatePost />
       <Tools />
     </>
   );

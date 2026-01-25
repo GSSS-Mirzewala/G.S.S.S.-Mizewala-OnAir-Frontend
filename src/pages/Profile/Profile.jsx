@@ -10,7 +10,7 @@ import { APIsContext } from "@/storage/APIs";
 
 function Profile() {
   // Declarations
-  const { SET_AUTH_API_CALLED, AUTH_API_CALLED } = useContext(APIsContext);
+  const { SET_AUTH_API_CALLED } = useContext(APIsContext);
   const USER = useSelector((store) => store.COMMON_IDENTITY);
   const navigate = useNavigate();
 
@@ -38,6 +38,7 @@ function Profile() {
       }
     }
   }, [id, USER?._id, navigate]);
+
   return (
     <div className="p-2">
       <Banner USER_INFO={USER_INFO} />

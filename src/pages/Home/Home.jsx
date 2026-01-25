@@ -3,13 +3,13 @@ import { useEffect, useState } from "react";
 import { addDays, format } from "date-fns";
 
 // Local Components
+import useHead from "@hooks/Head.jsx";
+import api from "@utils/api";
 import Intro from "./components/Intro";
 import Quote from "./components/Quote";
 import PrincipalSays from "./components/PrincipalSays";
 import NewUpdate from "./components/NewUpdate";
 import Questions from "./components/Questions";
-import api from "@utils/api";
-import useHead from "@hooks/Head.jsx";
 
 function Home() {
   useHead({
