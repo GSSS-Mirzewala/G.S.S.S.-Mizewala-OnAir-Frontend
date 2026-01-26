@@ -1,53 +1,65 @@
 // External Modules
-import { useEffect, useState } from "react";
+import { format, parseISO } from "date-fns";
+import { useSelector } from "react-redux";
+import { useEffect, useMemo, useState } from "react";
 
 // Local Modules
-import Message from "@components/Message";
+import api from "@utils/api.js";
 import useHead from "@hooks/Head.jsx";
-
-// Graphics
-import Empty_Notification_Light from "@graphics/Empty_Notifications_Light.svg";
+import Notification from "./components/Notification";
+import Seperator from "./components/Seperator";
 
 function Notifications() {
+  // Declarations
+  const USER = useSelector((store) => store.COMMON_IDENTITY);
+
+  // State
+  const [POSTS, UPDATE_POSTS] = useState([]);
+
   useHead({
     title: "Notifications | G.S.S.S. Mirzewala",
   });
-  const [MESSAGE, SET_MESSAGE] = useState();
-  const Messages = [
-    "No updates… maybe the teachers are on a coffee break ☕",
-    "Nothing new from school – enjoy the silence! 🤫",
-    "Breaking News: Nothing to announce today!",
-    "No fresh notices — only fresh air 🍃",
-    "No notifications yet… looks like even the notice board is on vacation 🏖️",
-    "No updates… perhaps the staff room WiFi is slow 🐌",
-    "Notice board is empty. Maybe it’s shy today 🙈",
-    "Oh! Wait… wait… something might be on the way 👀",
-    "Almost… almost… nope, no notification yet! 🤣",
-    "Oh! Wait… maybe an update is cooking in the staff room 🍵",
-    "Something is loading… just kidding, nothing yet!",
-    "Shh… listen… that’s the sound of no notifications 🎶",
-    "The notice board is on a tea break ☕",
-    "Notifications are shy today 🙈",
-    "Maybe the notifications missed the bus 🚌",
-    "Loading… loading… ah, just kidding! Still nothing 😂",
-  ];
-
-  function GetNotificationMessage() {
-    const RandomNumber = Math.floor(Math.random() * Messages.length);
-    return Messages[RandomNumber];
-  }
 
   useEffect(() => {
-    SET_MESSAGE(GetNotificationMessage());
+    const fetchPosts = async () => {
+      try {
+        const response = await api("GET", "p/fetch");
+        UPDATE_POSTS(response.data.data);
+        console.log(POSTS);
+      } catch (error) {
+        console.log(error?.message || "Something went Wrong!");
+      }
+    };
+    fetchPosts();
   }, []);
 
-  const Notifications = [];
+  // 🔹 GROUP POSTS BY SAME DAY
+  const POSTS_BY_DATE = useMemo(() => {
+    return POSTS.reduce((acc, post) => {
+      const dateKey = format(parseISO(post.createdAt), "MMMM d, yyyy");
+
+      (acc[dateKey] ||= []).push(post);
+      return acc;
+    }, {});
+  }, [POSTS]);
+
   return (
-    <>
-      {Notifications.length === 0 ? (
-        <Message MESSAGE={MESSAGE} Graphic={Empty_Notification_Light} />
-      ) : null}
-    </>
+    <div className="flex flex-col gap-6">
+      {Object.entries(POSTS_BY_DATE).map(([date, posts]) => (
+        <div key={date} className="flex flex-col gap-2">
+          <Seperator date={date} />
+          {posts.map((Post) => (
+            <Notification
+              key={Post._id}
+              Avatar={Post.poster.avatarUrl}
+              posterName={Post.poster.name}
+              text={Post.content || "Loading..."}
+              time={format(parseISO(Post.createdAt), "hh:mm a")}
+            />
+          ))}
+        </div>
+      ))}
+    </div>
   );
 }
 
