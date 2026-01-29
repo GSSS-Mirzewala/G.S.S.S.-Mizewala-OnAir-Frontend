@@ -69,13 +69,13 @@ function Login() {
           ...response.data.mongodata,
         }),
       );
-      if (response.data.mongodata.common.userType === "Teacher") {
+      if (response.data.mongodata.userType === "Teacher") {
         dispatch(
           SpecialIdentityActions.SETUP_TEACHER({
             ...refObj,
           }),
         );
-      } else if (response.data.mongodata.common.userType === "Student") {
+      } else if (response.data.mongodata.userType === "Student") {
         dispatch(
           SpecialIdentityActions.SETUP_STUDENT({
             ...refObj,
