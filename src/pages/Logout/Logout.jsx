@@ -19,12 +19,7 @@ function Logout() {
 
   useEffect(() => {
     const logout = async () => {
-      try {
-        await api("POST", "auth/logout", true);
-      } catch (error) {
-        console.error(error?.message || "Failed to Logout");
-      }
-
+      await api("POST", "auth/logout", true);
       dispatch(CommonIdentityActions.LOGOUT());
       dispatch(SpecialIdentityActions.LOGOUT());
 

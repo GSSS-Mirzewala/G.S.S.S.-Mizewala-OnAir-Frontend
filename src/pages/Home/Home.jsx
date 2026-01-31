@@ -1,6 +1,5 @@
 // React Hooks
 import { useEffect, useState } from "react";
-import { addDays, format } from "date-fns";
 
 // Local Components
 import useHead from "@hooks/Head.jsx";
@@ -22,23 +21,14 @@ function Home() {
   async function CheckNewUpdate() {
     SET_NEW_UPDATE_DATA(null);
     const response = await api("GET", "public/latestupdate", false);
-    if (response.status === 200 && response.data.success) {
-      if (
-        format(new Date(response.data.mongodata.createdAt), "yyyyMMdd") <=
-        format(addDays(new Date(), 30), "yyyyMMdd")
-      ) {
-        SET_NOTIFY(true);
-        return response.data.mongodata;
-      } else {
-        SET_NOTIFY(false);
-      }
+    if (response.isSuccess) {
+      SET_NOTIFY(true);
+      SET_NEW_UPDATE_DATA(response.mongodata);
     }
   }
 
   useEffect(() => {
-    CheckNewUpdate().then((data) => {
-      SET_NEW_UPDATE_DATA(data);
-    });
+    CheckNewUpdate();
   }, []);
 
   return (

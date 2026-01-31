@@ -1,6 +1,6 @@
 // External Modules
 import { format, getYear } from "date-fns";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 
@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom";
 import Holiday_Light from "@graphics/Holiday_Light.svg";
 
 // Local Modules
+import { APIsContext } from "@/storage/APIs";
 import { useHoliday } from "@hooks/ContextHooks";
 import MarkerStudentRow from "./components/MarkerStudentRow";
 import Preview from "../Dashboard/components/Preview";
@@ -17,6 +18,8 @@ import { MarkerActions } from "@/store/slices/MarkerSlice";
 import api from "@utils/api";
 
 function Marker() {
+  // Declarations
+  const { AUTH_API_CALLED } = useContext(APIsContext);
   const SP_USER = useSelector((store) => store.SPECIAL_IDENTITY);
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -44,18 +47,23 @@ function Marker() {
     return Messages[RandomNumber];
   }
 
-  useEffect(() => {
-    if (SP_USER.teacherInfo.assignedClass === null) {
-      navigate("/");
-    } else {
-      api("GET", `t/marker/class/${SP_USER.teacherInfo.assignedClass}`).then(
-        (res) => {
-          if (res.status === 200 && res.data.success) {
-            UPDATE_STD_LIST(res.data.mongodata);
-          }
-        },
-      );
+  async function callAPI() {
+    const response = await api(
+      "GET",
+      `t/marker/class/${SP_USER.teacherInfo.assignedClass}`,
+    );
+    if (response.isSuccess) {
+      UPDATE_STD_LIST(response.mongodata);
     }
+  }
+
+  useEffect(() => {
+    if (!AUTH_API_CALLED && SP_USER.teacherInfo.assignedClass === null) {
+      navigate("/");
+    }
+
+    callAPI();
+
     SET_MESSAGE(GetNotificationMessage());
   }, []);
 
@@ -124,7 +132,7 @@ function Marker() {
                   _id={info._id}
                   name={info.name}
                   avatarUrl={info.avatarUrl}
-                  fatherName={info.fatherName}
+                  fatherName={info.reference.fatherName}
                   isMarked={info.marked}
                   Mark={handleMarkAttendence}
                   key={info._id}

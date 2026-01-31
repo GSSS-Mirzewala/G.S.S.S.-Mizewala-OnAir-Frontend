@@ -5,13 +5,13 @@ function Quote() {
   const [QUOTE, SET_QUOTE] = useState();
 
   async function fetchQuote() {
-    const response = await api("GET", "public/quote", false);
-    if (response.status === 200 && response.data.success) {
-      if (response.data.mongodata.length === 0) {
-        SET_QUOTE("Teachers plant seeds of knowledge that grow forever.");
-      } else {
-        SET_QUOTE(response.data.mongodata);
+    try {
+      const response = await api("GET", "public/quote", false);
+      if (response.isSuccess) {
+        SET_QUOTE(response.mongodata);
       }
+    } catch (error) {
+      SET_QUOTE("Teachers plant seeds of knowledge that grow forever.");
     }
   }
 

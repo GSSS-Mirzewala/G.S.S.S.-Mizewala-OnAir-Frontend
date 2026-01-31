@@ -40,7 +40,7 @@ function Help() {
         concern,
       });
 
-      SET_SUCCESS(response.data.message);
+      SET_SUCCESS(response.message);
       SET_Email("");
       SET_Concern("");
     } catch (error) {
@@ -98,7 +98,6 @@ function Help() {
               onChange={(e) => SET_Concern(e.target.value)}
             ></textarea>
           </div>
-          {ERROR !== null && <API_Status type="error" message={ERROR} />}
           {SUCCESS !== null && <API_Status type="success" message={SUCCESS} />}
           {API_CALLED ? (
             <API_Loader />

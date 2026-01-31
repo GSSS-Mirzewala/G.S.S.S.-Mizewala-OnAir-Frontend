@@ -2,6 +2,7 @@
 import { Outlet } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useContext, useEffect, useState } from "react";
+import { Toaster } from "react-hot-toast";
 
 // Styles Sheets
 import "./App.css";
@@ -53,7 +54,12 @@ function App() {
   if (API_LOADING || LOADING) {
     return <AppLoader />;
   }
-  return <Outlet />;
+  return (
+    <>
+      <Outlet />
+      <Toaster />
+    </>
+  );
 }
 
 export default App;

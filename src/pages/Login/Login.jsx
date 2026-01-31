@@ -7,7 +7,6 @@ import { useDispatch, useSelector } from "react-redux";
 // Local Modules
 import { useBSF } from "@hooks/SecurityHooks";
 import API_Loader from "@components/API_Loader";
-import API_Status from "@components/API_Status";
 import useHead from "@hooks/Head.jsx";
 import { APIsContext } from "@/storage/APIs";
 import api from "@utils/api";
@@ -62,22 +61,28 @@ function Login() {
         miPin,
         password,
       });
-      let refObj = response.data.mongodata.reference;
-      delete response.data.mongodata.reference;
+      let refObj = response.mongodata.reference;
+      delete response.mongodata.reference;
       dispatch(
         CommonIdentityActions.SETUP_NEW_USER({
-          ...response.data.mongodata,
+          ...response.mongodata,
         }),
       );
-      if (response.data.mongodata.userType === "Teacher") {
+      if (response.mongodata.userType === "Teacher") {
         dispatch(
           SpecialIdentityActions.SETUP_TEACHER({
             ...refObj,
           }),
         );
-      } else if (response.data.mongodata.userType === "Student") {
+      } else if (response.mongodata.userType === "Student") {
         dispatch(
           SpecialIdentityActions.SETUP_STUDENT({
+            ...refObj,
+          }),
+        );
+      } else if (response.mongodata.userType === "Admin") {
+        dispatch(
+          SpecialIdentityActions.SETUP_ADMIN({
             ...refObj,
           }),
         );
@@ -197,7 +202,6 @@ function Login() {
             </div>
           </div>
         </div>
-        {ERROR !== null && <API_Status type="error" message={ERROR} />}
         <div className="flex flex-col gap-4 mt-4">
           {LOGIN_API_CALLED && <API_Loader />}
           <button

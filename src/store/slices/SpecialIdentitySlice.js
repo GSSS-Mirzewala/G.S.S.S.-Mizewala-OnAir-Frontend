@@ -17,6 +17,10 @@ const INITIAL_STATE = {
     rollNumber: null,
     section: null,
   },
+  adminInfo: {
+    permissionsLevel: null,
+    status: null,
+  },
 };
 
 const SpecialIdentitySlice = createSlice({
@@ -37,6 +41,10 @@ const SpecialIdentitySlice = createSlice({
       state.studentInfo.motherName = action.payload.motherName;
       state.studentInfo.rollNumber = action.payload.rollNumber;
       state.studentInfo.section = action.payload.section;
+    },
+    SETUP_ADMIN: (state, action) => {
+      state.adminInfo.permissionsLevel = action.payload.permissionsLevel;
+      state.adminInfo.status = action.payload.status;
     },
     LOGOUT: () => INITIAL_STATE,
   },

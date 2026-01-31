@@ -20,22 +20,17 @@ function Profile() {
 
   // Functions
   async function callAPI() {
+    SET_AUTH_API_CALLED(true);
     const response = await api("GET", `u/get/p/${id}`);
-    UPDATE_USER_INFO(response.data.mongodata);
+    UPDATE_USER_INFO(response.mongodata);
   }
 
   useEffect(() => {
     if (!id && USER?._id) {
       navigate(`/profile/${USER._id}`, { replace: true });
     } else if (id && USER?._id) {
-      try {
-        SET_AUTH_API_CALLED(true);
-        callAPI();
-      } catch (error) {
-        console.log(error?.message || "Something went wrong!");
-      } finally {
-        SET_AUTH_API_CALLED(false);
-      }
+      callAPI();
+      SET_AUTH_API_CALLED(false);
     }
   }, [id, USER?._id, navigate]);
 

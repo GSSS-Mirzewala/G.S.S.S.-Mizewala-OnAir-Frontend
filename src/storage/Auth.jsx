@@ -19,24 +19,30 @@ export const AuthProvider = ({ children }) => {
         SET_AUTH_API_CALLED(true);
         const response = await api("GET", "u/get/p/me", true);
 
-        let refObj = response.data.mongodata.reference;
+        let refObj = response.mongodata.reference;
 
-        delete response.data.mongodata.reference;
+        delete response.mongodata.reference;
 
         dispatch(
           CommonIdentityActions.SETUP_NEW_USER({
-            ...response.data.mongodata,
+            ...response.mongodata,
           }),
         );
-        if (response.data.mongodata.userType === "Teacher") {
+        if (response.mongodata.userType === "Teacher") {
           dispatch(
             SpecialIdentityActions.SETUP_TEACHER({
               ...refObj,
             }),
           );
-        } else if (response.data.mongodata.userType === "Student") {
+        } else if (response.mongodata.userType === "Student") {
           dispatch(
             SpecialIdentityActions.SETUP_STUDENT({
+              ...refObj,
+            }),
+          );
+        } else if (response.mongodata.userType === "Admin") {
+          dispatch(
+            SpecialIdentityActions.SETUP_ADMIN({
               ...refObj,
             }),
           );

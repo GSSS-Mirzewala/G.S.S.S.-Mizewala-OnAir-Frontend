@@ -13,8 +13,8 @@ function ReleaseNotes() {
   const [RELEASE_NOTES, UPDATE_RELEASE_NOTES] = useState([]);
   async function getNotes() {
     const response = await api("GET", "public/updates", false);
-    if (response.status === 200 && response.data.success) {
-      UPDATE_RELEASE_NOTES(response.data.mongodata);
+    if (response.isSuccess) {
+      UPDATE_RELEASE_NOTES(response.mongodata);
     }
   }
 
