@@ -5,10 +5,13 @@ import { toast } from "react-hot-toast";
 // Local Modules
 import ERRORS from "@/data/Errors.js";
 
-function handleErrorAction(config) {
+function handleErrorAction(code, config) {
   switch (config.action) {
     case "SHOW_TOAST":
       toast.error(config.message);
+      break;
+
+    case "DO_NOTHING":
       break;
 
     case "REDIRECT_LOGIN":

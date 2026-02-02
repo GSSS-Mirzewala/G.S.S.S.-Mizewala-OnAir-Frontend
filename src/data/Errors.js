@@ -14,13 +14,20 @@ const ERRORS = {
     action: "SHOW_TOAST",
   },
 
+  NOT_LOGGED_IN: {
+    action: "DO_NOTHING",
+  },
+
+  CANNOT_ACCESS_PAGE: {
+    action: "REDIRECT_HOME",
+  },
+
   WRONG_PASSWORD: {
     message: "Incorrect password. Please try again.",
     action: "SHOW_TOAST",
   },
 
   FAILED_TO_UPDATE_STATUS: {
-    message: "Failed to Update Your Status.",
     action: "REDIRECT_HOME",
   },
 

@@ -46,6 +46,7 @@ function App() {
     }
 
     if (USER.isLoggedIn) {
+      heartbeat()
       const sendHeartBeat = setInterval(heartbeat, 30000); // Every 30 Seconds
       return () => clearInterval(sendHeartBeat);
     }

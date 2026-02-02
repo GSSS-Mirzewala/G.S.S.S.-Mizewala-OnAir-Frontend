@@ -4,9 +4,10 @@ import { useSelector } from "react-redux";
 import { useNavigate, useParams } from "react-router-dom";
 
 // Local Modules
-import Banner from "./components/Banner";
 import api from "@utils/api.js";
 import { APIsContext } from "@/storage/APIs";
+import Banner from "./components/Banner";
+import Hotbar from "./components/Hotbar";
 
 function Profile() {
   // Declarations
@@ -37,6 +38,7 @@ function Profile() {
   return (
     <div className="p-2">
       <Banner USER_INFO={USER_INFO} />
+      {USER?.isLoggedIn && <Hotbar />}
     </div>
   );
 }
