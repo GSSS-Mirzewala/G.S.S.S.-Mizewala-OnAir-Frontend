@@ -38,7 +38,7 @@ function Profile() {
   return (
     <div className="p-2">
       <Banner USER_INFO={USER_INFO} />
-      {USER?.isLoggedIn && <Hotbar />}
+      {USER?._id === USER_INFO?._id && <Hotbar />}
     </div>
   );
 }

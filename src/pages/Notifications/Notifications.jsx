@@ -25,8 +25,8 @@ function Notifications() {
       try {
         const response = await api("GET", "p/fetch");
         UPDATE_POSTS(response.data);
-      } catch (error) {
-        console.log(error?.message || "Something went Wrong!");
+      } catch (err) {
+        console.log("Error ->", err);
       }
     };
     fetchPosts();
