@@ -2,7 +2,7 @@
 import { motion } from "framer-motion";
 
 function Loader() {
-  const Name = [
+  const BrandName = [
     { text: "G.", color: "text-orange-500" },
     { text: "S.", color: "text-orange-500" },
     { text: "S.", color: "text-orange-500" },
@@ -19,9 +19,10 @@ function Loader() {
     { text: "a", color: "text-green-700" },
   ];
   return (
-    <div className="flex items-center justify-center h-screen bg-white">
+    <div className="flex flex-col items-center justify-between h-screen bg-white">
+      <div></div>
       <h1 className="flex text-3xl font-semibold tracking-widest">
-        {Name.map((letter, i) => (
+        {BrandName.map((letter, i) => (
           <motion.span
             key={i}
             className={letter.color}
@@ -31,7 +32,7 @@ function Loader() {
               duration: 0.5,
               ease: "easeInOut",
               repeat: Infinity,
-              repeatDelay: (Name.length - 1) * 0.3,
+              repeatDelay: (BrandName.length - 1) * 0.3,
               delay: i * 0.3, // bounce one-by-one
             }}
           >
@@ -39,6 +40,15 @@ function Loader() {
           </motion.span>
         ))}
       </h1>
+      <div></div>
+      {/* <div className="pb-4">
+        <h2
+          className="font-semibold tracking-wider"
+          style={{ fontFamily: "Inter, sans-serif" }}
+        >
+          Setting up the app...{" "}
+        </h2>
+      </div> */}
     </div>
   );
 }

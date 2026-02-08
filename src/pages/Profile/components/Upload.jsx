@@ -33,7 +33,7 @@ function Upload({ neutralizeModal, setUrl, setFile }) {
       {/* Upload button */}
       <img
         src={UploadIcon}
-        alt="Upload Icon"
+        alt="Upload-Icon"
         width={35}
         className="cursor-pointer"
         onClick={() => fileInputRef.current.click()}

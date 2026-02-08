@@ -16,22 +16,19 @@ import { APIsContext } from "./storage/APIs";
 function App() {
   // Declarations
   const USER = useSelector((store) => store.COMMON_IDENTITY);
-  const { AUTH_API_CALLED } = useContext(APIsContext);
-
-  // States
-  const [LOADING, SET_LOADING] = useState(false);
-  const [API_LOADING, SET_API_LOADING] = useState(false);
+  const { AUTH_API_CALLED, INTERNALS_API_CALLED, SET_INTERNALS_API_CALLED } =
+    useContext(APIsContext);
 
   async function checkSession() {
     if (!sessionStorage.getItem("appLoader")) {
       try {
-        SET_LOADING(true);
+        SET_INTERNALS_API_CALLED(true);
         await health();
       } catch (error) {
         throw new Error(error?.message || "Something went wrong!");
       } finally {
-        SET_LOADING(false);
         sessionStorage.setItem("appLoader", true);
+        SET_INTERNALS_API_CALLED(false);
       }
     }
   }
@@ -39,20 +36,14 @@ function App() {
   useEffect(() => {
     checkSession();
 
-    if (AUTH_API_CALLED) {
-      SET_API_LOADING(true);
-    } else {
-      SET_API_LOADING(false);
-    }
-
     if (USER.isLoggedIn) {
-      heartbeat()
+      heartbeat();
       const sendHeartBeat = setInterval(heartbeat, 30000); // Every 30 Seconds
       return () => clearInterval(sendHeartBeat);
     }
   }, [AUTH_API_CALLED]);
 
-  if (API_LOADING || LOADING) {
+  if (AUTH_API_CALLED || INTERNALS_API_CALLED) {
     return <AppLoader />;
   }
   return (

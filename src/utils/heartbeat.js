@@ -5,7 +5,7 @@ function heartbeat() {
   try {
     api("POST", "i/heartbeat");
   } catch (error) {
-    console.error(error?.message || "Failed to verify Heartbeat");
+    console.error(error?.message || "Failed to beat your Heart!");
   }
 }
 
