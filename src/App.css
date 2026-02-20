@@ -2,6 +2,10 @@ body {
   background-color: #f1f2f4;
 }
 
+main {
+  min-height: 100svh;
+}
+
 @media (max-width: 648px) {
   footer {
     margin-bottom: 4rem;
