@@ -44,7 +44,7 @@ function Loader({ isLoaderIncluded = false }) {
 
   return (
     <div
-      className={`py-4 flex flex-col items-center ${isLoaderIncluded ? "justify-between" : "justify-center"} h-screen bg-white`}
+      className={`py-4 flex flex-col items-center ${isLoaderIncluded ? "justify-between" : "justify-center"} h-[100svh] bg-white`}
     >
       {isLoaderIncluded && <div></div>}
       <h1 className="flex text-3xl font-semibold tracking-widest">
