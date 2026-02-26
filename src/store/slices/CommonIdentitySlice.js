@@ -8,7 +8,6 @@ const INITIAL_STATE = {
   userType: "GUEST",
   accountStatus: null,
   name: null,
-  address: null,
   profilePictureUrl:
     "https://res.cloudinary.com/dbelpwtoy/image/upload/v1767074898/Avatar_si1ngf.svg",
   gender: null,
@@ -32,7 +31,6 @@ const CommonIdentitySlice = createSlice({
       state.profilePictureUrl = action.payload.profilePictureUrl;
       state.gender = action.payload.gender;
       state.dateOfBirth = action.payload.dateOfBirth;
-      state.address = action.payload.address;
       state.email = action.payload.email;
       state.phone = action.payload.phone;
       state.reference = action.payload.reference;

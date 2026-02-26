@@ -1,6 +1,6 @@
 const ERRORS = {
   NETWORK_ERROR: {
-    message: "Failed to Communicate with our Server.",
+    message: "Failed to communicate with our Servers.",
     action: "SHOW_TOAST",
   },
 

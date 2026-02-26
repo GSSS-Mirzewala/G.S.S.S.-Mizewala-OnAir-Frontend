@@ -9,6 +9,8 @@ const APIsContextProvider = ({ children }) => {
   const [AUTH_API_CALLED, SET_AUTH_API_CALLED] = useState(false);
   const [PROFILE_API_CALLED, SET_PROFILE_API_CALLED] = useState(false);
   const [INTERNALS_API_CALLED, SET_INTERNALS_API_CALLED] = useState(false);
+  const [IS_INFRASTRUCTURE_API_CALLED, SET_IS_INFRASTRUCTURE_API_CALLED] =
+    useState(false);
   return (
     <APIsContext.Provider
       value={{
@@ -20,6 +22,8 @@ const APIsContextProvider = ({ children }) => {
         SET_PROFILE_API_CALLED,
         INTERNALS_API_CALLED,
         SET_INTERNALS_API_CALLED,
+        IS_INFRASTRUCTURE_API_CALLED,
+        SET_IS_INFRASTRUCTURE_API_CALLED,
       }}
     >
       {children}

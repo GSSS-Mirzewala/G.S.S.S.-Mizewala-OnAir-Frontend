@@ -17,36 +17,43 @@ import { BPS } from "@/contexts/Protectors";
 function App() {
   // Declarations
   const USER = useSelector((store) => store.COMMON_IDENTITY);
-  const { AUTH_API_CALLED, INTERNALS_API_CALLED, SET_INTERNALS_API_CALLED } =
-    useContext(APIsContext);
+  const {
+    AUTH_API_CALLED,
+    IS_INFRASTRUCTURE_API_CALLED,
+    SET_IS_INFRASTRUCTURE_API_CALLED,
+  } = useContext(APIsContext);
 
   async function checkSession() {
-    if (!sessionStorage.getItem("appLoader")) {
+    if (sessionStorage.getItem("appLoader") !== "true")
       try {
-        SET_INTERNALS_API_CALLED(true);
+        SET_IS_INFRASTRUCTURE_API_CALLED(true);
         await health();
       } catch (error) {
-        throw new Error(error?.message || "Something went wrong!");
+        console.error(error);
       } finally {
         sessionStorage.setItem("appLoader", true);
-        SET_INTERNALS_API_CALLED(false);
+        SET_IS_INFRASTRUCTURE_API_CALLED(false);
       }
-    }
   }
 
   useEffect(() => {
     checkSession();
+  }, []);
 
-    if (USER.isLoggedIn) {
-      heartbeat();
-      const sendHeartBeat = setInterval(heartbeat, 30000); // Every 30 Seconds
-      return () => clearInterval(sendHeartBeat);
-    }
-  }, [AUTH_API_CALLED]);
+  useEffect(() => {
+    if (!USER?.isLoggedIn) return;
 
-  if (AUTH_API_CALLED || INTERNALS_API_CALLED) {
+    heartbeat();
+    const id = setInterval(heartbeat, 30000);
+    return () => clearInterval(id);
+  }, [USER?.isLoggedIn]);
+
+  if (AUTH_API_CALLED) {
+    return <AppLoader />;
+  } else if (IS_INFRASTRUCTURE_API_CALLED) {
     return <AppLoader isLoaderIncluded={true} />;
   }
+
   return (
     <BPS>
       <Outlet />

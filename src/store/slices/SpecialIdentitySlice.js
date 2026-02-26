@@ -7,8 +7,6 @@ const INITIAL_STATE = {
     assignedClass: null,
     subject: null,
     designation: null,
-    qualifications: [],
-    dateOfJoining: null,
   },
   studentInfo: {
     class: null,
@@ -31,8 +29,6 @@ const SpecialIdentitySlice = createSlice({
       state.teacherInfo.assignedClass = action.payload.assignedClass;
       state.teacherInfo.subject = action.payload.subject;
       state.teacherInfo.designation = action.payload.designation;
-      state.teacherInfo.qualifications = action.payload.qualifications;
-      state.teacherInfo.dateOfJoining = action.payload.dateOfJoining;
     },
     SETUP_STUDENT: (state, action) => {
       state.studentInfo.class = action.payload.class;

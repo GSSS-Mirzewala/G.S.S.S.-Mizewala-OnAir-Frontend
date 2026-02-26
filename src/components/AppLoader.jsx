@@ -24,7 +24,7 @@ function Loader({ isLoaderIncluded = false }) {
 
   useEffect(() => {
     if (!isLoaderIncluded) return;
-    const duration = 30000; // 30 seconds in ms
+    const duration = 50000; // 50 Seconds
     const intervalTime = 100; // update every 100ms
     const increment = 100 / (duration / intervalTime);
 
@@ -44,7 +44,7 @@ function Loader({ isLoaderIncluded = false }) {
 
   return (
     <div
-      className={`py-4 flex flex-col items-center ${isLoaderIncluded ? "justify-between" : "justify-center"} h-[100svh] bg-white`}
+      className={`py-4 flex flex-col items-center ${isLoaderIncluded ? "justify-between" : "justify-center"} h-screen bg-white`}
     >
       {isLoaderIncluded && <div></div>}
       <h1 className="flex text-3xl font-semibold tracking-widest">
