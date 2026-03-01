@@ -48,10 +48,10 @@ function App() {
     return () => clearInterval(id);
   }, [USER?.isLoggedIn]);
 
-  if (AUTH_API_CALLED) {
-    return <AppLoader />;
-  } else if (IS_INFRASTRUCTURE_API_CALLED) {
+  if (IS_INFRASTRUCTURE_API_CALLED) {
     return <AppLoader isLoaderIncluded={true} />;
+  } else if (AUTH_API_CALLED) {
+    return <AppLoader />;
   }
 
   return (
