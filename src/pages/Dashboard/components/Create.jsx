@@ -8,7 +8,7 @@ import api from "@utils/api.js";
 import { useBRTSF } from "@/hooks/SecurityHooks";
 
 // Icons
-// import Image from "@icons/Image.svg";
+import Image from "@icons/Image.svg";
 import Send from "@icons/Send.svg";
 import Synchronize from "@icons/Synchronize.svg";
 
@@ -21,8 +21,8 @@ function Create() {
   const [CAN_VIEW, SET_CAN_VIEW] = useState("Who can see your Post?");
   const [ERROR, SET_ERROR] = useState("");
   const [SUCCESS, SET_SUCCESS] = useState("");
-  // const fileInputRef = useRef(null);
-  // const [selectedImage, setSelectedImage] = useState(null);
+  const fileInputRef = useRef(null);
+  const [selectedImage, setSelectedImage] = useState(null);
 
   function handleViewChanger() {
     if (CAN_VIEW === "Everyone") {
@@ -35,13 +35,13 @@ function Create() {
   }
 
   // Handle file selection
-  // function handleFileChange(e) {
-  //   const file = e.target.files[0];
-  //   if (file) {
-  //     const imageUrl = URL.createObjectURL(file);
-  //     setSelectedImage(imageUrl);
-  //   }
-  // }
+  function handleFileChange(e) {
+    const file = e.target.files[0];
+    if (file) {
+      const imageUrl = URL.createObjectURL(file);
+      setSelectedImage(imageUrl);
+    }
+  }
 
   async function handleSubmit(e) {
     e.preventDefault();
@@ -96,14 +96,14 @@ function Create() {
               className="w-full min-h-20 max-h-50 outline-none font-normal text-black resize-none tracking-wide"
               style={{ fontFamily: "Poppins, sans-serif" }}
             />
-            {/* {selectedImage && (
+            {selectedImage && (
               <img
                 src={selectedImage}
                 alt="Preview"
                 width={150}
                 className="rounded-sm"
               />
-            )} */}
+            )}
             {ERROR !== "" && (
               <p className="text-red-600 font-semibold">{ERROR}</p>
             )}

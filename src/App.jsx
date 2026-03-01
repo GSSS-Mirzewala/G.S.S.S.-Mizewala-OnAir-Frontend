@@ -24,7 +24,7 @@ function App() {
   } = useContext(APIsContext);
 
   async function checkSession() {
-    if (sessionStorage.getItem("appLoader") !== "true")
+    if (!sessionStorage.getItem("appLoader"))
       try {
         SET_IS_INFRASTRUCTURE_API_CALLED(true);
         await health();
