@@ -111,17 +111,17 @@ function Create() {
               <p className="text-green-700 font-semibold">{SUCCESS}</p>
             )}
           </div>
-          {/* <div> */}
+          <div> 
           {/* Hidden input */}
-          {/* <input
+           <input
               type="file"
               accept="image/*"
               ref={fileInputRef}
               style={{ display: "none" }}
               onChange={handleFileChange}
-            /> */}
+            /> 
           {/* Gallery Icon - Triggers file Selector */}
-          {/* <img
+          <img
               src={Image}
               width={20}
               alt="Upload_Image"
@@ -129,8 +129,8 @@ function Create() {
               onClick={() => {
                 fileInputRef.current.click();
               }}
-            /> */}
-          {/* </div> */}
+            />
+          </div>
         </div>
       </div>
       <div className="p-3 flex items-center justify-between">
