@@ -20,7 +20,7 @@ import api from "@utils/api";
 function Marker() {
   // Declarations
   const { AUTH_API_CALLED } = useContext(APIsContext);
-  const SP_USER = useSelector((store) => store.SPECIAL_IDENTITY);
+  const User = useSelector((store) => store.User);
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -50,7 +50,7 @@ function Marker() {
   async function callAPI() {
     const response = await api(
       "GET",
-      `t/marker/class/${SP_USER.teacherInfo.assignedClass}`,
+      `t/marker/class/${User?.teacherInfo?.assignedClass}`,
     );
     if (response.isSuccess) {
       UPDATE_STD_LIST(response.data);
@@ -58,7 +58,7 @@ function Marker() {
   }
 
   useEffect(() => {
-    if (!AUTH_API_CALLED && SP_USER.teacherInfo.assignedClass === null) {
+    if (!AUTH_API_CALLED && User?.teacherInfo?.assignedClass === null) {
       navigate("/");
     }
 
@@ -103,7 +103,7 @@ function Marker() {
               {getYear(new Date())}
             </span>
             <span className="text-lg max-sm:text-base font-semibold text-red-500">
-              Class {SP_USER.teacherInfo.assignedClass}
+              Class {User?.teacherInfo?.assignedClass}
             </span>
             <button
               type="button"
@@ -121,7 +121,7 @@ function Marker() {
                 <div className="fixed inset-0 flex items-center justify-center z-50">
                   <Preview
                     UPDATE_PREVIEW_STATE={handlePreview}
-                    assignedClass={SP_USER.teacherInfo.assignedClass}
+                    assignedClass={User?.teacherInfo?.assignedClass}
                   />
                 </div>
               </>

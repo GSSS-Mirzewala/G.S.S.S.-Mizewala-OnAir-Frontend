@@ -1,20 +1,32 @@
-// React Router (Components)
+// External Modules
 import { Form } from "react-router-dom";
-
-// React Redux (Hooks)
 import { useSelector } from "react-redux";
 
-// Local Components
+// Local Modules
+import api from "@utils/api.js";
 import Preview_STD from "./Preview_STD";
 
 function Preview({ UPDATE_PREVIEW_STATE }) {
   const SHEET = useSelector((store) => store.MARKER_SHEET);
+  const User = useSelector((store) => store.User);
   const STD_LIST = [];
+
   JSON.parse(JSON.stringify(SHEET)).map((entries) => {
     STD_LIST.push(entries);
   });
-  function handleSubmit() {
-    console.log("Hi", SHEET);
+
+  async function handleSubmit() {
+    try {
+      const res = await api(
+        "POST",
+        `t/marker/create/doc/class/${User?.teacherInfo?.assignedClass}`,
+        true,
+        { SHEET },
+      );
+      console.log(res);
+    } catch (err) {
+      console.log("Preview Error:", err);
+    }
   }
   return (
     <Form className="bg-white min-w-[90vw] max-w-[90vh] max-md:max-w-[350px] rounded-[10px] shadow-lg">

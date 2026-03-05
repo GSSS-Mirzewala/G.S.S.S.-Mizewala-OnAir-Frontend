@@ -2,15 +2,13 @@
 import { configureStore } from "@reduxjs/toolkit";
 
 // Slices
-import CommonIdentity from "./slices/CommonIdentitySlice";
-import SpecialIdentity from "./slices/SpecialIdentitySlice";
+import User from "./slices/user.slice.js";
 import MarkerSheet from "./slices/MarkerSlice";
 
 // Configuring Store
 const STORE = configureStore({
   reducer: {
-    COMMON_IDENTITY: CommonIdentity,
-    SPECIAL_IDENTITY: SpecialIdentity,
+    User: User,
     MARKER_SHEET: MarkerSheet,
   },
 });

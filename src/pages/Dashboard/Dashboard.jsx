@@ -8,15 +8,18 @@ import Student from "./Student";
 import Admin from "./Admin";
 
 function Dashboard() {
+  // Meta Data
   useHead({
     title: "Dashboard | G.S.S.S. Mirzewala",
   });
-  const USER = useSelector((store) => store.COMMON_IDENTITY);
+
+  // Declarations
+  const User = useSelector((store) => store.User);
   return (
     <>
-      {USER.userType === "Student" && <Student />}
-      {USER.userType === "Teacher" && <Teacher />}
-      {USER.userType === "Admin" && <Admin />}
+      {User?.userType === "Student" && <Student />}
+      {User?.userType === "Teacher" && <Teacher />}
+      {User?.userType === "Admin" && <Admin />}
     </>
   );
 }

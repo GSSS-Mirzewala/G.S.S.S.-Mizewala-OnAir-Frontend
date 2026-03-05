@@ -1,17 +1,17 @@
 // Assets
 import VerifiedIcon from "@icons/Verified.svg";
 
-function Banner({ USER_INFO }) {
+function Banner({ info }) {
   return (
     <>
       <div className="px-2">
         <div
           className={`w-full min-h-40 border-3 ${
-            USER_INFO?.isOnline ? "border-green-800" : "border-black"
+            info?.isOnline ? "border-green-800" : "border-black"
           }  bg-white rounded-md`}
         >
           <div className="flex flex-row items-center justify-end py-2 px-4">
-            {USER_INFO?.isVerified && (
+            {info?.isVerified && (
               <img
                 src={VerifiedIcon}
                 alt="Verified_Icon"
@@ -23,12 +23,12 @@ function Banner({ USER_INFO }) {
         </div>
         <div
           className={`p-1 relative -top-14 -left-4 min-w-20 max-w-20 min-h-20 max-h-20 border-3 ${
-            USER_INFO?.isOnline ? "border-green-800" : "border-black"
+            info?.isOnline ? "border-green-800" : "border-black"
           } rounded-full bg-white`}
         >
           <img
-            src={USER_INFO?.profilePictureUrl}
-            alt={`${USER_INFO?.name}' Profile Picture`}
+            src={info?.profilePictureUrl}
+            alt={`${info?.name}' Profile Picture`}
             style={{
               borderRadius: "50%",
               minWidth: "66px",

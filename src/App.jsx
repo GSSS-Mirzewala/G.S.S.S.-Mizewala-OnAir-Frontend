@@ -16,7 +16,9 @@ import { BPS } from "@/contexts/Protectors";
 
 function App() {
   // Declarations
-  const USER = useSelector((store) => store.COMMON_IDENTITY);
+  const User = useSelector((store) => store.User);
+
+  // Constants, States & References
   const {
     AUTH_API_CALLED,
     IS_INFRASTRUCTURE_API_CALLED,
@@ -41,12 +43,12 @@ function App() {
   }, []);
 
   useEffect(() => {
-    if (!USER?.isLoggedIn) return;
+    if (!User?.isLoggedIn) return;
 
     heartbeat();
     const id = setInterval(heartbeat, 30000);
     return () => clearInterval(id);
-  }, [USER?.isLoggedIn]);
+  }, [User?.isLoggedIn]);
 
   if (IS_INFRASTRUCTURE_API_CALLED) {
     return <AppLoader isLoaderIncluded={true} />;

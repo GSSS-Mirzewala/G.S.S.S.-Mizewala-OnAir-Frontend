@@ -14,7 +14,7 @@ import Synchronize from "@icons/Synchronize.svg";
 
 function Create() {
   // Declarations
-  const USER = useSelector((store) => store.COMMON_IDENTITY);
+  const User = useSelector((store) => store.User);
 
   // Constants & States
   const [CONTENT, UPDATE_CONTENT] = useState("");
@@ -54,10 +54,10 @@ function Create() {
         content: useBRTSF(CONTENT),
         showTo: CAN_VIEW,
       });
-      if (response.data.isSuccess) {
+      if (response.isSuccess) {
         UPDATE_CONTENT("");
         SET_CAN_VIEW("Who can see your Post?");
-        SET_SUCCESS(response.data.message);
+        SET_SUCCESS(response.message);
       } else {
         SET_SUCCESS(null);
         SET_ERROR("Failed to Create Post.");
@@ -74,13 +74,13 @@ function Create() {
         <img
           width={40}
           height={40}
-          src={USER.profilePictureUrl}
+          src={User.profilePictureUrl}
           alt="Profile-Picture"
           className="rounded-full"
         />
         <div className="w-full flex flex-col">
           <Link to="" className="font-semibold">
-            {USER.name}
+            {User.name}
           </Link>
           <div>
             <textarea
@@ -111,17 +111,17 @@ function Create() {
               <p className="text-green-700 font-semibold">{SUCCESS}</p>
             )}
           </div>
-          <div> 
-          {/* Hidden input */}
-           <input
+          <div>
+            {/* Hidden input */}
+            <input
               type="file"
               accept="image/*"
               ref={fileInputRef}
               style={{ display: "none" }}
               onChange={handleFileChange}
-            /> 
-          {/* Gallery Icon - Triggers file Selector */}
-          <img
+            />
+            {/* Gallery Icon - Triggers file Selector */}
+            <img
               src={Image}
               width={20}
               alt="Upload_Image"

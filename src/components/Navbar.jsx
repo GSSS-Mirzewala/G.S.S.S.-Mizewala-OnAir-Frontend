@@ -12,7 +12,9 @@ import About from "@icons/About.svg";
 import Notifications from "@icons/Notifications.svg";
 
 function Navbar() {
-  const USER = useSelector((store) => store.COMMON_IDENTITY);
+  // Declarations
+  const User = useSelector((store) => store.User);
+
   return (
     <nav className="flex items-center justify-between w-full p-4 bg-white shadow-md">
       <div>
@@ -40,7 +42,7 @@ function Navbar() {
             <img src={Gallery} width={25} alt="Gallery" />
           </Link>
         </div>
-        {USER.userType !== "GUEST" ? (
+        {User?.userType !== "GUEST" ? (
           <div className="hidden md:block cursor-pointer">
             <Link to="/dashboard">
               <img src={Dashboard} width={25} alt="Dashboard" />
@@ -58,14 +60,14 @@ function Navbar() {
           </Link>
         </div>
         <Link
-          to={USER.userType === "GUEST" ? "/login" : `/profile/${USER._id}`}
+          to={User?.userType === "GUEST" ? "/login" : `/profile/${User?._id}`}
         >
           <button
             className={`flex items-center justify-center border-1 rounded-full p-1 px-2 gap-2 cursor-pointer`}
             type="button"
           >
             <img
-              src={USER.profilePictureUrl}
+              src={User?.profilePictureUrl}
               width={24}
               height={24}
               style={{
@@ -77,15 +79,15 @@ function Navbar() {
               loading="lazy"
             />
             <span className="hidden sm:block font-semibold text-md">
-              {USER.userType === "GUEST" ? "Login" : USER.name}
+              {User?.userType === "GUEST" ? "Login" : User?.name}
             </span>
             <span className="sm:hidden font-semibold text-md">
-              {USER.userType === "GUEST"
+              {User?.userType === "GUEST"
                 ? "Login"
                 : (() => {
-                    return USER.name.length > 12
-                      ? USER.name.slice(0, 12) + "..."
-                      : USER.name;
+                    return User?.name.length > 12
+                      ? User?.name.slice(0, 12) + "..."
+                      : User?.name;
                   })()}
             </span>
           </button>

@@ -6,8 +6,7 @@ import { useDispatch } from "react-redux";
 // Local Modules
 import api from "@utils/api";
 import useHead from "@hooks/Head.jsx";
-import { CommonIdentityActions } from "@/store/slices/CommonIdentitySlice";
-import { SpecialIdentityActions } from "@/store/slices/SpecialIdentitySlice";
+import { UserActions } from "@/store/slices/user.slice";
 
 function Logout() {
   useHead({
@@ -20,8 +19,8 @@ function Logout() {
   useEffect(() => {
     const logout = async () => {
       await api("POST", "auth/logout", true);
-      dispatch(CommonIdentityActions.LOGOUT());
-      dispatch(SpecialIdentityActions.LOGOUT());
+      dispatch(UserActions.LOGOUT());
+      dispatch(UserActions.LOGOUT());
 
       navigate("/");
       window.location.reload();

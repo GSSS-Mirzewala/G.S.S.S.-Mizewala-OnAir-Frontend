@@ -14,12 +14,12 @@ import Modal from "./components/Modal";
 function Profile() {
   // Declarations
   const navigate = useNavigate();
-  const USER = useSelector((store) => store.COMMON_IDENTITY);
+  const User = useSelector((store) => store.User);
   const { SET_AUTH_API_CALLED, PROFILE_API_CALLED } = useContext(APIsContext);
 
   // Constants & States
   const { id } = useParams();
-  const [USER_INFO, UPDATE_USER_INFO] = useState({});
+  const [User_INFO, UPDATE_User_INFO] = useState({});
   const [MODAL_OPEN, SET_MODAL_OPEN] = useState(false);
   const [IMAGE_URL, SET_IMAGE_URL] = useState("");
   const [IMAGE_FILE, SET_IMAGE_FILE] = useState("");
@@ -28,7 +28,7 @@ function Profile() {
   async function callAPI() {
     SET_AUTH_API_CALLED(true);
     const response = await api("GET", `u/get/p/${id}`);
-    UPDATE_USER_INFO(response.data);
+    UPDATE_User_INFO(response.data);
   }
 
   function neutralizeModal() {
@@ -39,15 +39,15 @@ function Profile() {
     if (id) {
       callAPI();
       SET_AUTH_API_CALLED(false);
-    } else if (!id && USER?._id) {
-      navigate(`/profile/${USER._id}`, { replace: true });
+    } else if (!id && User?._id) {
+      navigate(`/profile/${User._id}`, { replace: true });
     }
-  }, [id, USER?._id, navigate]);
+  }, [id, User?._id, navigate]);
 
   return (
     <div className="p-2">
       {PROFILE_API_CALLED && <API_Loader />}
-      <Banner USER_INFO={USER_INFO} />
+      <Banner info={User_INFO} />
       {MODAL_OPEN && (
         <Modal
           neutralizeModal={neutralizeModal}
@@ -55,7 +55,7 @@ function Profile() {
           file={IMAGE_FILE}
         />
       )}
-      {USER?._id === USER_INFO?._id && (
+      {User?._id === User_INFO?._id && (
         <Hotbar
           neutralizeModal={neutralizeModal}
           setUrl={SET_IMAGE_URL}

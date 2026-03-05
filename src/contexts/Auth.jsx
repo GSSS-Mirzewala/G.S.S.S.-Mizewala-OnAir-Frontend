@@ -4,8 +4,7 @@ import { useDispatch } from "react-redux";
 
 // Local Modules
 import api from "@utils/api.js";
-import { CommonIdentityActions } from "@/store/slices/CommonIdentitySlice";
-import { SpecialIdentityActions } from "@/store/slices/SpecialIdentitySlice";
+import { UserActions } from "@/store/slices/user.slice";
 import { APIsContext } from "./APIs";
 import { useOrganizer } from "@hooks/Manager";
 
@@ -22,8 +21,8 @@ export const AuthProvider = ({ children }) => {
         const response = await api("GET", "u/get/p/me", true);
         organizeUser(response.data, response.data.reference);
       } catch {
-        dispatch(CommonIdentityActions.LOGOUT());
-        dispatch(SpecialIdentityActions.LOGOUT());
+        dispatch(UserActions.LOGOUT());
+        dispatch(UserActions.LOGOUT());
       } finally {
         SET_AUTH_API_CALLED(false);
       }

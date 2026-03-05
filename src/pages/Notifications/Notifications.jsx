@@ -1,6 +1,5 @@
 // External Modules
 import { format, parseISO } from "date-fns";
-import { useSelector } from "react-redux";
 import { useEffect, useMemo, useState } from "react";
 
 // Local Modules
@@ -10,9 +9,6 @@ import Notification from "./components/Notification";
 import Seperator from "./components/Seperator";
 
 function Notifications() {
-  // Declarations
-  const USER = useSelector((store) => store.COMMON_IDENTITY);
-
   // State
   const [POSTS, UPDATE_POSTS] = useState([]);
 

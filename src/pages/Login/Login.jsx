@@ -27,7 +27,7 @@ function Login() {
   // Declarations
   const navigate = useNavigate();
   const organizeUser = useOrganizer();
-  const USER = useSelector((store) => store.COMMON_IDENTITY);
+  const User = useSelector((store) => store.User);
   const { LOGIN_API_CALLED, SET_LOGIN_API_CALLED, AUTH_API_CALLED } =
     useContext(APIsContext);
 
@@ -83,7 +83,7 @@ function Login() {
   }
 
   useEffect(() => {
-    if (!AUTH_API_CALLED && USER.isLoggedIn) {
+    if (!AUTH_API_CALLED && User.isLoggedIn) {
       navigate("/");
     }
   }, [AUTH_API_CALLED, navigate]);

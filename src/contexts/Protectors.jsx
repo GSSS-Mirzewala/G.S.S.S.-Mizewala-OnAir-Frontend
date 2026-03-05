@@ -24,7 +24,7 @@ const Routes = [
 
 export const BPS = ({ children }) => {
   // Declarations
-  const USER = useSelector((store) => store.COMMON_IDENTITY);
+  const User = useSelector((store) => store.User);
   const { AUTH_API_CALLED } = useContext(APIsContext);
   const location = useLocation();
   const navigate = useNavigate();
@@ -43,7 +43,7 @@ export const BPS = ({ children }) => {
     }
 
     // 2️⃣ Private route but not logged in
-    if (included?.type === "private" && AUTH_API_CALLED && !USER?.isLoggedIn) {
+    if (included?.type === "private" && AUTH_API_CALLED && !User?.isLoggedIn) {
       navigate("/", { replace: true });
       return;
     }
@@ -53,16 +53,16 @@ export const BPS = ({ children }) => {
       included?.access &&
       included.type === "private" &&
       AUTH_API_CALLED &&
-      USER?.isLoggedIn &&
-      !included.access.includes(USER.userType)
+      User?.isLoggedIn &&
+      !included.access.includes(User.userType)
     ) {
       navigate("/", { replace: true });
     }
   }, [
     location.pathname,
     AUTH_API_CALLED,
-    USER?.isLoggedIn,
-    USER?.userType,
+    User?.isLoggedIn,
+    User?.userType,
     navigate,
   ]);
 

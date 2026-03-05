@@ -2,8 +2,7 @@
 import { useDispatch } from "react-redux";
 
 // Local Modules
-import { SpecialIdentityActions } from "@/store/slices/SpecialIdentitySlice";
-import { CommonIdentityActions } from "@/store/slices/CommonIdentitySlice";
+import { UserActions } from "@/store/slices/user.slice";
 
 export const useOrganizer = () => {
   const dispatch = useDispatch();
@@ -12,14 +11,14 @@ export const useOrganizer = () => {
     const obj = data;
     delete obj.reference;
 
-    dispatch(CommonIdentityActions.SETUP_NEW_USER(data));
+    dispatch(UserActions.SETUP_NEW_USER(data));
 
     if (obj.userType === "Teacher") {
-      dispatch(SpecialIdentityActions.SETUP_TEACHER(reference));
+      dispatch(UserActions.SETUP_TEACHER(reference));
     } else if (data.userType === "Student") {
-      dispatch(SpecialIdentityActions.SETUP_STUDENT(reference));
+      dispatch(UserActions.SETUP_STUDENT(reference));
     } else if (data.userType === "Admin") {
-      dispatch(SpecialIdentityActions.SETUP_ADMIN(reference));
+      dispatch(UserActions.SETUP_ADMIN(reference));
     }
   };
 };
