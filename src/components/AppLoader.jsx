@@ -24,7 +24,7 @@ function Loader({ isLoaderIncluded = false }) {
 
   useEffect(() => {
     if (!isLoaderIncluded) return;
-    const duration = 50000; // 50 Seconds
+    const duration = 45000; // 45 Seconds
     const intervalTime = 100; // update every 100ms
     const increment = 100 / (duration / intervalTime);
 
