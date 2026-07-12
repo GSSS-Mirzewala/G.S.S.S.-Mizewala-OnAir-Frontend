@@ -20,7 +20,7 @@ function Notification({ profilePictureUrl, posterName, posterId, text, time }) {
             Posted by {posterName}
           </Link>
           <p className="text-sm font-normal text-gray-500 tracking-wide">
-            {text.length > 100 ? text.slice(0, 100) + "..." : text}
+            {text}
           </p>
         </div>
       </div>
