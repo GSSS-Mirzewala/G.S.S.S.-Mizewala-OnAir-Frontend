@@ -11,15 +11,8 @@ export const HolidayProvider = ({ children }) => {
     let isHoliday = false;
     if (format(new Date(), "EEEE") === "Sunday") {
       isHoliday = true;
-    } else if (
-      Holidays.find(
-        (holiday) =>
-          holiday.Date ===
-          `${getDate(new Date())}${getMonth(new Date())}${getYear(new Date())}`
-      )
-    ) {
-      isHoliday = true;
     }
+    
     return isHoliday;
   }
 
