@@ -6,9 +6,6 @@ import { createContext, useState } from "react";
 
 const HolidayContext = createContext();
 
-// Data
-import Holidays from "@/data/Holidays.js";
-
 export const HolidayProvider = ({ children }) => {
   function determineHoliday() {
     let isHoliday = false;

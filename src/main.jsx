@@ -27,7 +27,6 @@ import Notifications from "@page/Notifications/Notifications";
 import Logout from "@page/Logout/Logout";
 import Dashboard from "@page/Dashboard/Dashboard";
 import Marker from "@page/Marker/Marker";
-import Music from "@page/Music/Music";
 
 const router = createBrowserRouter([
   {
@@ -37,24 +36,21 @@ const router = createBrowserRouter([
         element: <Classic />,
         children: [
           { index: true, element: <Home /> },
-          { path: "about", element: <About /> },
-          { path: "release_notes", element: <About /> },
-          { path: "credits", element: <About /> },
-          { path: "gallery", element: <Gallery /> },
-          { path: "notifications", element: <Notifications /> },
-          { path: "profile/", element: <Profile /> },
-          { path: "profile/:id", element: <Profile /> },
-          { path: "dashboard", element: <Dashboard /> },
-          { path: "marker", element: <Marker /> },
-          { path: "music", element: <Music /> },
+          { path: "/credits", element: <About /> },
+          { path: "/gallery", element: <Gallery /> },
+          { path: "/notifications", element: <Notifications /> },
+          { path: "/profile/", element: <Profile /> },
+          { path: "/profile/:id", element: <Profile /> },
+          { path: "/dashboard", element: <Dashboard /> },
+          { path: "/marker", element: <Marker /> },
         ],
       },
       {
         element: <Minimalist />,
         children: [
-          { path: "login", element: <Login /> },
-          { path: "help", element: <Help /> },
-          { path: "logout", element: <Logout /> },
+          { path: "/login", element: <Login /> },
+          { path: "/help", element: <Help /> },
+          { path: "/logout", element: <Logout /> },
         ],
       },
     ],

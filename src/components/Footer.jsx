@@ -19,27 +19,7 @@ function Footer() {
         </p>
       </div>
       <hr className="text-gray-300" />
-      <div className="flex items-center justify-between flex-col md:flex-row pt-4">
-        <div className="hidden md:flex flex-wrap gap-x-8 items-center">
-          <Link
-            to="/about"
-            className="font-semibold text-gray-400 transition-colors duration-300 ease-in-out hover:text-[royalblue]"
-          >
-            Who we are?
-          </Link>
-          <Link
-            to="/release_notes"
-            className="font-semibold text-gray-400 transition-colors duration-300 ease-in-out hover:text-[royalblue]"
-          >
-            Release Notes
-          </Link>
-          <Link
-            to="/credits"
-            className="font-semibold text-gray-400 transition-colors duration-300 ease-in-out hover:text-[royalblue]"
-          >
-            Credits
-          </Link>
-        </div>
+      <div className="flex items-center justify-center flex-col md:flex-row pt-4">
         <div className="flex items-center justify-end gap-4 md:gap-6">
           <Link target="_blank" to="https://www.instagram.com/gsssmirzawala/">
             <img

@@ -33,7 +33,7 @@ function Navigation() {
         </div>
       ) : null}
       <div>
-        <Link to="/about">
+        <Link to="/credits">
           <img src={About} alt="About" width={25} />
         </Link>
       </div>

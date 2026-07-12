@@ -50,7 +50,7 @@ function Navbar() {
           </div>
         ) : null}
         <div className="hidden md:block cursor-pointer">
-          <Link to="/about">
+          <Link to="/credits">
             <img src={About} width={25} alt="About" />
           </Link>
         </div>
